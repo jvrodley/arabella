@@ -1,3 +1,5 @@
+import 'dotenv/config';
+import express from 'express';
 import {
     InteractionType,
     InteractionResponseType,
@@ -5,22 +7,28 @@ import {
     MessageComponentTypes,
     ButtonStyleTypes,
 } from 'discord-interactions';
-
+import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js';
 import { getShuffledOptions, getResult } from './game.js';
+import {
+    NEED_COMMAND,
+    CHALLENGE_COMMAND,
+    HasGuildCommands,
+} from './commands.js';
 
-/**
- * Interactions endpoint URL where Discord will send HTTP requests
- */
-async function interactions(req, res) {
-    // Interaction type and data
+import fs from 'fs';
+import http from 'http';
+import https from 'https';
+
+export async function discord_interaction(req, res ) {
+// Interaction type and data
     console.log("req.body = " + JSON.stringify(req.body))
-    const { type, id, data } = req.body;
+    const {type, id, data} = req.body;
 
     /**
      * Handle verification requests
      */
     if (type === InteractionType.PING) {
-        return res.send({ type: InteractionResponseType.PONG });
+        return res.send({type: InteractionResponseType.PONG});
     }
 
     /**
@@ -28,7 +36,7 @@ async function interactions(req, res) {
      * See https://discord.com/developers/docs/interactions/application-commands#slash-commands
      */
     if (type === InteractionType.APPLICATION_COMMAND) {
-        const { name } = data;
+        const {name} = data;
 
         // "need" guild command
         if (name === 'nood') {
@@ -42,6 +50,40 @@ async function interactions(req, res) {
             });
         }
 
+        // "challenge" guild command
+        if (name === 'challenge' && id) {
+            const userId = req.body.member.user.id;
+            // User's object choice
+            const objectName = req.body.data.options[0].value;
+
+            // Create active game using message ID as the game ID
+            activeGames[id] = {
+                id: userId,
+                objectName,
+            };
+
+            return res.send({
+                type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                data: {
+                    // Fetches a random emoji to send from a helper function
+                    content: `Rock papers scissors challenge from <@${userId}>`,
+                    components: [
+                        {
+                            type: MessageComponentTypes.ACTION_ROW,
+                            components: [
+                                {
+                                    type: MessageComponentTypes.BUTTON,
+                                    // Append the game ID to use later on
+                                    custom_id: `accept_button_${req.body.id}`,
+                                    label: 'Accept',
+                                    style: ButtonStyleTypes.PRIMARY,
+                                },
+                            ],
+                        },
+                    ],
+                },
+            });
+        }
     }
 
     /**
@@ -81,7 +123,7 @@ async function interactions(req, res) {
                     },
                 });
                 // Delete previous message
-                await DiscordRequest(endpoint, { method: 'DELETE' });
+                await DiscordRequest(endpoint, {method: 'DELETE'});
             } catch (err) {
                 console.error('Error sending message:', err);
             }
@@ -108,7 +150,7 @@ async function interactions(req, res) {
                     // Send results
                     await res.send({
                         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-                        data: { content: resultStr },
+                        data: {content: resultStr},
                     });
                     // Update ephemeral message
                     await DiscordRequest(endpoint, {
@@ -124,6 +166,4 @@ async function interactions(req, res) {
             }
         }
     }
-};
-
-export default interactions;
+}
