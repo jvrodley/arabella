@@ -50,6 +50,7 @@ describe("FORK PROJECT", () => {
                     foo: "bar",
                 },
             });
+            octokit.rest.repos.createFork
             console.log("Event dispatched for repo named " + repository.full_name);
         }
     }
