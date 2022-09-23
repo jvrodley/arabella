@@ -14,8 +14,8 @@ let app_name = process.env.APP_NAME
 let tokenAuth // NOTE: not real token
 let client
 
-describe("FORK PROJECT", () => {
-    console.log("fork_project")
+describe("DISPATCH EVENT", () => {
+    console.log("dispatch_event")
     it('dispatch_event', async function () {
         console.log("process.env.NODE_ENV = " + process.env.NODE_ENV)
         await test_dispatchevent()
