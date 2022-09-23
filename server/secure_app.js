@@ -12,6 +12,7 @@ import fs from 'fs';
 import http from 'http';
 import https from 'https';
 import bodyParser from 'body-parser';
+import discord_calls from "./discord_calls.js";
 
 
 const privateKey  = fs.readFileSync('sslcert/_.rodley.com.key', 'utf8');
@@ -68,7 +69,9 @@ app.use(function (err, req, res, next) {
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
  */
-app.post('/interactions', interactions );
+app.post('/interactions', async function (req, res) {
+  return( discord_calls.interactions( req, res ))
+});
 
 // var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
