@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import express from 'express';
-import interactions from './discord_calls.js'
 import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js';
 import {
   NEED_COMMAND,
