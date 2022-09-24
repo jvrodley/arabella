@@ -71,7 +71,7 @@ app.use(function (err, req, res, next) {
 // Test the database connection
 // bubbles_db.testConnection( function(err) { log.error("!!!!!!!!!!!!!!!!!! ", err); process.exit(1)})
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static('/home/admin/arabella/server/client/build'));
 
 /**
  * Interactions endpoint URL where Discord will send HTTP requests

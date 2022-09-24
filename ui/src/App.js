@@ -13,7 +13,7 @@ function App() {
     useEffect(() => {
         const fetchData = async () => {
             console.log("useEffect fetchData")
-            let x = await getNeeds('localhost', 3000)
+            let x = await getNeeds('arabella.rodley.com', 3000)
             console.log("needs " + JSON.stringify(x))
             setNeeds(x)
         }
