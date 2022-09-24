@@ -218,15 +218,14 @@ async function makeTheChannel(channelName) {
 // Login to Discord with your client's token
     await client.login(process.env.DISCORD_TOKEN);
 
-    let guild = client.guilds.fetch(process.env.DISCORD_GUILD_ID)
-    let options = {
-        type:"text"
-    }
+    let guild = client.guilds.fetch(process.env.GUILD_ID)
+    console.log("guild = " + JSON.stringify(guild))
 
     const createOptions = {
         name: channelName,
-        type: 0
+        type: 0 // text
     };
     const channel = (await guild).channels.create( createOptions );
+    console.log("channel = " + JSON.stringify(channel))
 
 }
