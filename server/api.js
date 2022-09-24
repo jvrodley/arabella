@@ -104,11 +104,11 @@ export async function getRepoMetadata(owner, repo) {
 export async function addNeed(need) {
     console.log("addNeed " + JSON.stringify(need))
     let ret = GetOwnerProjectFromURL(need.original_github_url)
-    let metadata = getRepoMetadata(ret.owner, ret.project)
+    let metadata = await getRepoMetadata(ret.owner, ret.project)
     need.original_github_description = metadata.description
     console.log("metadata is " + JSON.stringify(metadata))
     need.original_github_url = ret.owner
-    need.languages = getLanguages(ret.owner, ret.project)
+    need.languages = await getLanguages(ret.owner, ret.project)
     console.log("languages is " + JSON.stringify(need.languages))
 
     return new Promise(function(resolve, reject) {
