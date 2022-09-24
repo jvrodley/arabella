@@ -79,7 +79,7 @@ export async function getLanguages(owner, repo) {
         repo,
     });
 
-    console.log("return from dispatches call " + JSON.stringify(ret))
+    console.log("return from languages call " + JSON.stringify(ret.data))
     let languages = ret.data.keys()
     return(languages)
 }
