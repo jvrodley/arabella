@@ -16,12 +16,16 @@ function App() {
     function setNeedListFromChild(needs) {
         setNeeds(needs)
     }
+
     function setProjectListFromChild(projects) {
         setProjects(projects)
     }
 
-    let the_need_list = <NeedList needs={needs} setNeedListFromChild={setNeedListFromChild} />
-    let my_project_list = <ProjectList projects={projects}  setProjectListFromChild={setProjectListFromChild} />
+    let claimed_project_heading = "You Have Created A Fork"
+    let claimed_project_page = <p>AAAAAAAA</p>
+
+    let the_need_list = <NeedList needs={needs} setNeedListFromChild={setNeedListFromChild}/>
+    let my_project_list = <ProjectList projects={projects} setProjectListFromChild={setProjectListFromChild}/>
 
     let my_project_heading = "My Projects"
     let current_needs_heading = "Current Needs"
@@ -29,15 +33,20 @@ function App() {
     const [the_list, setTheList] = useState(the_need_list)
     const [the_heading, setTheHeading] = useState(current_needs_heading)
 
-    function gotoProjectList() {
-            setTheList( my_project_list )
-            setTheHeading(my_project_heading)
-        }
+    function gotoClaimedProject() {
+        setTheList(claimed_project_page)
+        setTheHeading(claimed_project_heading)
+    }
 
-        function gotoNeedList() {
-            setTheList( the_need_list )
-            setTheHeading(current_needs_heading)
-        }
+    function gotoProjectList() {
+        setTheList(my_project_list)
+        setTheHeading(my_project_heading)
+    }
+
+    function gotoNeedList() {
+        setTheList(the_need_list)
+        setTheHeading(current_needs_heading)
+    }
 
     return (
         <Grommet theme={hp}>
@@ -65,7 +74,7 @@ function App() {
                                  <Button icon={<Help/>} hoverIndicator/>
                              }>
                         <Nav gap="small">
-                            <Button icon={<Projects/>} hoverIndicator label={"Current Needs"} onClick={gotoNeedList}/>
+                            <Button icon={<Projects/>} hoverIndicator label={"Current Needs"} onClick={gotoNeedList} gotoClaimedProject={gotoClaimedProject()}/>
                             <Button icon={<Projects/>} hoverIndicator label={"My Projects"} onClick={gotoProjectList}/>
                             <Button icon={<Clock/>} hoverIndicator/>
                         </Nav>
