@@ -3,10 +3,39 @@ import {Help, Home, Projects, Chat, Clock} from "grommet-icons" ;
 import { Anchor, Avatar, Box, Button, Footer, Grid, Grommet, Header, Heading, List, Main, Menu, Nav,
     Paragraph, Sidebar, Stack, Table, TableBody, TableCell, TableHeader,TableRow,  Text, base as baseTheme  } from "grommet"
 import { hp } from 'grommet-theme-hp';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import {getNeeds} from 'utils'
 
 function App() {
 
+    const [needs, setNeeds] = useState([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log("useEffect fetchData")
+            let x = await getNeeds('localhost', 3000)
+            log.trace("needs " + JSON.stringify(x))
+            setNeeds(x)
+        }
+        fetchData();
+    }, [])  // eslint-disable-line react-hooks/exhaustive-deps
+
+
+    function claimRow(ev) {
+        alert("Claiming row " + JSON.stringify(ev))
+    }
+
+    function getNeedRow(row, index, arr) {
+        return <TableRow>
+            <TableCell scope="row">
+                <strong>{row.original_github_url}</strong>
+                <br />{row.original_github_description}</TableCell>
+            <TableCell>{row.description}</TableCell>
+            <TableCell>{row.languages}</TableCell>
+            <TableCell><Button label={"Claim"} onClick={claimRow}/> </TableCell>
+        </TableRow>
+
+    }
     let the_need_list = <Table>
         <TableHeader>
             <TableRow>
@@ -22,64 +51,7 @@ function App() {
             </TableRow>
         </TableHeader>
         <TableBody>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>Datalux/Osintgram</strong>
-                    <br />Osintgram is a OSINT tool on Instagram to collect, analyze, and run reconnaissance.</TableCell>
-                <TableCell>Work with Python 3.9 on Windows 7</TableCell>
-                <TableCell>Python, Makefile, Dockerfile</TableCell>
-                <TableCell><Button label={"Claim"} /> </TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>laramies/theHarvester</strong>
-                    <br />theHarvester is a simple to use, yet powerful tool designed to be used during the reconnaissance stage of a red
-                    team assessment or penetration test.</TableCell>
-                <TableCell>Needs a Windows UI that limits arguments to small subset - see Discord discussion</TableCell>
-                <TableCell>Python, Dockerfile</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>s0md3v/Photon</strong>
-                    <br />Incredibly fast crawler designed for OSINT.</TableCell>
-                <TableCell>Broken - needs to work with Python 3.7 on Mac</TableCell>
-                <TableCell>Python, Dockerfile</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>DedSecInside/TorBot</strong>
-                    <br />Dark Web OSINT Tool</TableCell>
-                <TableCell>Broken - won't build/run in Debian, Mac or Windows</TableCell>
-                <TableCell>Python, Shell, Dockerfile</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>m4ll0k/Infoga</strong>
-                <br />Infoga - Email OSINT</TableCell>
-                <TableCell>Work with Python 3.9 on Windows 7</TableCell>
-                <TableCell>Python, Dockerfile</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>sc1341/InstagramOSINT</strong>
-                    <br />An Instagram Open Source Intelligence Tool</TableCell>
-                <TableCell>Work with Python 3.9 on Windows 7</TableCell>
-                <TableCell>Python</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>SharadKumar97/OSINT-SPY</strong>
-                 Performs OSINT scan on email/domain/ip_address/organization using OSINT-SPY. It can be used by Data Miners, Infosec R</TableCell>
-                <TableCell>Work with Python 3.9 on Windows 7</TableCell>
-                <TableCell>Python</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>kennbroorg/iKy</strong>
-                OSINT Project</TableCell>
-                <TableCell>Work with Python 3.9 on Windows 7</TableCell>
-                <TableCell>Python</TableCell>
-            </TableRow>
+            {needs.map(getNeedRow)}
         </TableBody>
     </Table>
     let my_project_list = <Table>

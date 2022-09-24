@@ -61,7 +61,7 @@ export async function discord_interaction(req, res ) {
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data: {
                     // Fetches a random emoji to send from a helper function
-                    content: 'the project was added to the need list with needid ' + result.needid,
+                    content: 'Project added with ID A007609' + result.needid,
                 },
             });
         }
