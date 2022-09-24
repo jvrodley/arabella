@@ -17,7 +17,7 @@ export async function getNeeds(host, port) {
 export async function claimAndFork(host, port, owner, project, claimid) {
     console.log("claimAndFork calling out to api")
 
-    fetch('https://'+host+':' + props.port + '/fork', {
+    fetch('https://'+host+':' + port + '/fork', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
