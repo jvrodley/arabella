@@ -212,7 +212,7 @@ export async function updateClaim( claimid, forked_github_owner, forked_github_u
                 if (error) {
                     reject(error)
                 } else {
-                    resolve({claimid: results.rows[0].claimid} )
+                    resolve({claimid: claimid} )
                 }
             })
     })
