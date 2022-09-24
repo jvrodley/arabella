@@ -4,7 +4,7 @@ import { Anchor, Avatar, Box, Button, Footer, Grid, Grommet, Header, Heading, Li
     Paragraph, Sidebar, Stack, Table, TableBody, TableCell, TableHeader,TableRow,  Text, base as baseTheme  } from "grommet"
 import { hp } from 'grommet-theme-hp';
 import {useState, useEffect} from 'react'
-import {getNeeds} from 'utils'
+import {getNeeds} from './utils'
 
 function App() {
 
