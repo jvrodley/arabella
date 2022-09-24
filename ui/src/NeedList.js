@@ -24,7 +24,7 @@ export function NeedList(props) {
         console.log("Claiming row " +JSON.stringify(row))
         const fetchData = async () => {
             console.log("claimRow fetchData")
-            let x = await claimAndFork('arabella.rodley.com', 3000, row.owner, row.project, row.needid)
+            let x = await claimAndFork('arabella.rodley.com', 3000, row.original_github_owner, row.project, row.needid)
             console.log("rendering useEffect setting needs " + JSON.stringify(x))
         }
         fetchData();
