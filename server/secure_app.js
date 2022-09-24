@@ -38,8 +38,8 @@ app.get('/healthcheck',  async function (req, res) {
   return res.status(200).send("Healthcheck okay at " + datetime);
 });
 
-app.get('/needs',  async function (req, res) {
-  let needs = await getAllNeeds()
+app.get('/needs/:userid',  async function (req, res) {
+  let needs = await getAllNeeds(req.params.userid)
   return res.status(200).json(needs);
 });
 

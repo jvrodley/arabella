@@ -48,10 +48,10 @@ try {
     process.exit(1)
 }
 
-export async function getAllNeeds() {
+export async function getAllNeeds(userid) {
     console.log("needs getAllNeeds")
     return new Promise(function (resolve, reject) {
-        let ssql = "select * from need order by needid desc"
+        let ssql = "select * from need where needid not in (select needid_need from claim where userid_user="+userid+") order by needid desc"
         console.log(ssql)
         pool.query(ssql, (error, results) => {
             if (error) {
