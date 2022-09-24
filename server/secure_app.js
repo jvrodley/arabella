@@ -72,6 +72,10 @@ app.post('/interactions', async function (req, res) {
   return( discord_interaction(req,res))
 });
 
+app.get('/healthcheck',  async function (req, res) {
+  return res.status(200).send("Hey it worked!");
+});
+
 // var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
 
