@@ -13,6 +13,7 @@ export function NeedList(props) {
             console.log("useEffect fetchData")
             let x = await getNeeds('arabella.rodley.com', 3000)
             console.log("rendering useEffect setting needs " + JSON.stringify(x))
+            setNeeds(JSON.parse(JSON.stringify(x)))
             props.setNeedListFromChild(JSON.parse(JSON.stringify(x)))
         }
         fetchData();
