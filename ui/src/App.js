@@ -18,14 +18,14 @@ function App() {
             console.log("useEffect fetchData")
             let x = await getNeeds('arabella.rodley.com', 3000)
             console.log("rendering useEffect setting needs " + JSON.stringify(x))
-            setNeeds(JSON.parse(JSON.stringify(x)))
+            setNeeds({needs: JSON.parse(JSON.stringify(x))})
         }
         fetchData();
     }, [])  // eslint-disable-line react-hooks/exhaustive-deps
 
 
 
-    let the_need_list = <NeedList needs={needs} />
+    let the_need_list = <NeedList needs={needs.needs} />
     let my_project_list = <ProjectList projects={projects} />
 
     let my_project_heading = "My Projects"
