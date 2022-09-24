@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-import { GuildChannelCreateOptions, GuildChannelManagerClient, GatewayIntentBits } from 'discord.js';
+import { GatewayIntentBits } from 'discord.js';
 
 import {
     InteractionType,
