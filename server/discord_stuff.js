@@ -20,7 +20,7 @@ import {
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
-import {addNeed} from "./api.js";
+import {addNeed,setNeedInviteLink} from "./api.js";
 
 export async function discord_interaction(req, res ) {
 // Interaction type and data
