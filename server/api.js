@@ -81,7 +81,7 @@ export async function getLanguages(owner, repo) {
 
     console.log("return from languages call " + JSON.stringify(ret.data))
     let languages = ret.data.keys
-    return(languages)
+    return(JSON.stringify(languages))
 }
 
 export async function getRepoMetadata(owner, repo) {
