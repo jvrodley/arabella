@@ -88,10 +88,7 @@ export async function getRepoMetadata(owner, repo) {
         auth: process.env.MY_GITHUB_TOKEN
     })
 
-    let ret = await octokit.request('GET /repos/'+owner+'/'+repo, {
-        owner: owner,
-        repo: repo
-    })
+    let ret = await octokit.request('GET /repos/'+owner+'/'+repo)
 
     console.log("return from repo metadata call " + JSON.stringify(ret))
 }
