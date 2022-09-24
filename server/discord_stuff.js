@@ -39,7 +39,7 @@ export async function discord_interaction(req, res ) {
         const {name} = data;
 
         // "need" guild command
-        if (name === 'nood') {
+        if (name === 'a1') {
             // Send a message into the channel where command was triggered from
             return res.send({
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,

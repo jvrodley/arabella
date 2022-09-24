@@ -60,7 +60,7 @@ function createCommandChoices() {
 
 // Simple test command
 export const NEED_COMMAND = {
-  name: 'nood',
+  name: 'a1',
   description: 'Command to add a need to the list',
   type: 1,
   options: [
