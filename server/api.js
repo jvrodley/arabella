@@ -111,6 +111,9 @@ export async function addNeed(need) {
 //    need.original_github_url = ret.owner
     need.languages = await getLanguages(ret.owner, ret.project)
     console.log("languages is " + JSON.stringify(need.languages))
+    need.languages = need.languages.replaceAll('"', '')
+    need.languages = need.languages.replaceAll('[', '')
+    need.languages = need.languages.replaceAll(']', '')
 
     return new Promise(function(resolve, reject) {
         pool.query("INSERT INTO need (original_github_url, project, original_github_owner, original_github_description, description, target_os_name,target_os_version, target_name1, target_version1, languages) VALUES ($1,$2,$3,$4,$5, $6, $7, $8, $9, $10) RETURNING *",

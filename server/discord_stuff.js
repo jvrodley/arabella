@@ -43,18 +43,20 @@ export async function discord_interaction(req, res ) {
         if (name === 'a1') {
             // Add the need to the database
 
+            console.log("OPTIONS = " + JSON.stringify(req.body.data.options));
+
             // Send a message into the channel where command was triggered from
             let need = {
-                original_github_url: getNamedDiscordOptionField(req, 'url'),
+                original_github_url: getNamedDiscordOptionField(req.body.data, 'url'),
                 original_github_owner: 'original owner',
-                description: getNamedDiscordOptionField(req, 'description'),
-                target_os_name: getNamedDiscordOptionField(req, 'target_os_name'),
-                target_os_version: getNamedDiscordOptionField(req, 'target_os_version'),
-                target_name1: getNamedDiscordOptionField(req, 'target_name1'),
-                target_version1: getNamedDiscordOptionField(req, 'target_version1'),
-                target_name2: getNamedDiscordOptionField(req, 'target_name2'),
-                target_version2: getNamedDiscordOptionField(req, 'target_version2'),
-                languages: getNamedDiscordOptionField(req, 'languages')
+                description: getNamedDiscordOptionField(req.body.data, 'description'),
+                target_os_name: getNamedDiscordOptionField(req.body.data, 'target_os_name'),
+                target_os_version: getNamedDiscordOptionField(req.body.data, 'target_os_version'),
+                target_name1: getNamedDiscordOptionField(req.body.data, 'target_name1'),
+                target_version1: getNamedDiscordOptionField(req.body.data, 'target_version1'),
+                target_name2: getNamedDiscordOptionField(req.body.data, 'target_name2'),
+                target_version2: getNamedDiscordOptionField(req.body.data, 'target_version2'),
+                languages: getNamedDiscordOptionField(req.body.data, 'languages')
             }
             let result = await addNeed(need)
             return res.send({
@@ -184,11 +186,12 @@ export async function discord_interaction(req, res ) {
     }
 }
 
-function getNamedDiscordOptionField( req, name ) {
+function getNamedDiscordOptionField( data, name ) {
     console.log("getNamedDiscordOptionField " + name)
-    for( let i = 0; i < req.body.data.options.length; i++ ) {
-        if( req.body.data.options[i].name === name ) {
-            return (req.body.data.options[i].value)
+    for( let i = 0; i < data.options.length; i++ ) {
+        if( data.options[i].name === name ) {
+            console.log("getNamedDiscordOptionField " + name +"="+data.options[i].value)
+            return (data.options[i].value)
         }
     }
     return ''
