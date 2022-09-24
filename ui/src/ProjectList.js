@@ -1,6 +1,6 @@
 import {Button, Table, TableBody, TableCell, TableHeader, TableRow} from "grommet";
 import {useEffect, useState} from "react";
-import {getNeeds} from "./utils";
+import {getClaims} from "./utils";
 
 export function ProjectList(props) {
 
@@ -9,9 +9,9 @@ export function ProjectList(props) {
     useEffect(() => {
         const fetchData = async () => {
             console.log("useEffect fetchData")
-            let x = await getProjects('arabella.rodley.com', 3000, 1)
+            let x = await getClaims('arabella.rodley.com', 3000, 1)
             console.log("rendering useEffect setting projects " + JSON.stringify(x))
-            setNeeds(JSON.parse(JSON.stringify(x)))
+            setProjects(JSON.parse(JSON.stringify(x)))
             props.setProjectListFromChild(JSON.parse(JSON.stringify(x)))
         }
         fetchData();
