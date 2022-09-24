@@ -5,10 +5,12 @@ import { Anchor, Avatar, Box, Button, Footer, Grid, Grommet, Header, Heading, Li
 import { hp } from 'grommet-theme-hp';
 import {useState, useEffect} from 'react'
 import {getNeeds} from './utils'
+import {NeedList} from './NeedList'
 
 function App() {
 
     const [needs, setNeeds] = useState([])
+    const [projects, setProjects] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,72 +23,11 @@ function App() {
     }, [])  // eslint-disable-line react-hooks/exhaustive-deps
 
 
-    function claimRow(ev) {
-        alert("Claiming row " + JSON.stringify(ev))
-    }
 
-    function getNeedRow(row, index, arr) {
-        return <TableRow>
-            <TableCell scope="row">
-                <strong>{row.original_github_url}</strong>
-                <br />{row.original_github_description}</TableCell>
-            <TableCell>{row.description}</TableCell>
-            <TableCell>{row.languages}</TableCell>
-            <TableCell><Button label={"Claim"} onClick={claimRow}/> </TableCell>
-        </TableRow>
+    let the_need_list = <NeedList needs={needs} />
+    let my_project_list = <ProjectList projects={projects} />
 
-    }
-    let the_need_list = <Table>
-        <TableHeader>
-            <TableRow>
-                <TableCell scope="col" border="bottom">
-                    Project Name/Description
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                    The Need
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                    Languages
-                </TableCell>
-            </TableRow>
-        </TableHeader>
-        <TableBody>
-            {needs.map(getNeedRow)}
-        </TableBody>
-    </Table>
-    let my_project_list = <Table>
-        <TableHeader>
-            <TableRow>
-                <TableCell scope="col" border="bottom">
-                    Project Name/Description
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                    The Need
-                </TableCell>
-                <TableCell scope="col" border="bottom">
-                    Languages
-                </TableCell>
-            </TableRow>
-        </TableHeader>
-        <TableBody>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>laramies/theHarvester</strong>
-                    <br />theHarvester is a simple to use, yet powerful tool designed to be used during the reconnaissance stage of a red
-                    team assessment or penetration test.</TableCell>
-                <TableCell>Needs a Windows UI that limits arguments to small subset - see Discord discussion</TableCell>
-                <TableCell>Python, Dockerfile</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>Datalux/Osintgram</strong>
-                    <br />Osintgram is a OSINT tool on Instagram to collect, analyze, and run reconnaissance.</TableCell>
-                <TableCell>Work with Python 3.9 on Windows 7</TableCell>
-                <TableCell>Python, Makefile, Dockerfile</TableCell>
-            </TableRow>
-        </TableBody>
-    </Table>
-    let my_project_heading = "My Projects"
+        let my_project_heading = "My Projects"
     let current_needs_heading = "Current Needs"
 
     const [the_list, setTheList] = useState(the_need_list)
