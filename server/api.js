@@ -67,6 +67,7 @@ export async function getAllNeeds() {
 }
 
 export async function getLanguages(owner, repo) {
+    console.log('getLanguages {owner} {repo}')
     // https://docs.github.com/en/rest/repos/repos#list-repository-languages
 
     const octokit = new Octokit({
@@ -79,6 +80,7 @@ export async function getLanguages(owner, repo) {
 }
 
 export async function getRepoMetadata(owner, repo) {
+    console.log('getRepoMetadata {owner} {repo}')
     // https://docs.github.com/en/rest/repos/repos#get-a-repository
     // Octokit.js
     // https://github.com/octokit/core.js#readme
