@@ -208,7 +208,7 @@ async function makeTheChannel(channelName) {
 // Create a new client instance
     let client_options = { intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] }
 
-    const client = new Client(client_options);
+    const client = await new Client(client_options);
 
 // When the client is ready, run this code (only once)
     client.once('ready', () => {
@@ -218,7 +218,7 @@ async function makeTheChannel(channelName) {
 // Login to Discord with your client's token
     await client.login(process.env.DISCORD_TOKEN);
 
-    let guild = client.guilds.fetch(process.env.GUILD_ID)
+    let guild = await client.guilds.fetch(process.env.GUILD_ID)
     console.log("guild = " + JSON.stringify(guild))
 
     const createOptions = {
@@ -227,5 +227,22 @@ async function makeTheChannel(channelName) {
     };
     const channel = (await guild).channels.create( createOptions );
     console.log("channel = " + JSON.stringify(channel))
+    let invitelink = await getInviteLink(client, channelName)
+    console.log("invite link = " + invitelink)
 
 }
+
+const getInviteLink = async (client,channelName)=> {
+
+    let guild = client.guilds.fetch(process.env.GUILD_ID)
+
+    let channel = (await guild).channels.cache.find(channelName)
+    console.log("channel = " + JSON.stringify(channel))
+    const invite = await channel[0].createInvite({
+        maxUses: 1
+    });
+    return (`https://discord.gg/${invite.code}`);
+
+}
+
+getInviteLink().then(link => console.log(`${link}`))
