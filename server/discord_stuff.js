@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-import { GatewayIntentBits } from 'discord.js';
+import { Client, GatewayIntentBits } from 'discord.js';
 
 import {
     InteractionType,
@@ -206,7 +206,9 @@ function getNamedDiscordOptionField( data, name ) {
 
 async function makeTheChannel(channelName) {
 // Create a new client instance
-    const client = new Client();
+    let client_options = { intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] }
+
+    const client = new Client(client_options);
 
 // When the client is ready, run this code (only once)
     client.once('ready', () => {
