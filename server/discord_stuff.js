@@ -219,7 +219,11 @@ async function makeTheChannel(channelName) {
     await client.login(process.env.DISCORD_TOKEN);
 
     let guild = await client.guilds.fetch(process.env.GUILD_ID)
-    console.log("guild = " + JSON.stringify(guild))
+    try {
+        console.log("guild = " + JSON.stringify(guild))
+    } catch(e) {
+        console.log("guild = " + e)
+    }
 
     const createOptions = {
         name: channelName,
