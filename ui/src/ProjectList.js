@@ -1,9 +1,34 @@
 import {Button, Table, TableBody, TableCell, TableHeader, TableRow} from "grommet";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {getNeeds} from "./utils";
 
 export function ProjectList(props) {
 
     const [projects, setProjects] = useState(props.projects)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log("useEffect fetchData")
+            let x = await getProjects('arabella.rodley.com', 3000, 1)
+            console.log("rendering useEffect setting projects " + JSON.stringify(x))
+            setNeeds(JSON.parse(JSON.stringify(x)))
+            props.setProjectListFromChild(JSON.parse(JSON.stringify(x)))
+        }
+        fetchData();
+    }, [])  // eslint-disable-line react-hooks/exhaustive-deps
+
+    function getProjectRow(row, index, arr) {
+        return <TableRow>
+            <TableCell scope="row">
+                <strong><a href={row.forked_github_url}
+                           target={"_blank"}>{row.forked_github_owner}/{row.project}</a></strong>
+                <br/>{row.original_github_description}</TableCell>
+            <TableCell>{row.description}</TableCell>
+            <TableCell><a href={row.invite_link} target={"_blank"} >Discord discussion</a></TableCell>
+        </TableRow>
+    }
+
+
     let project_list = <Table>
         <TableHeader>
             <TableRow>
@@ -19,22 +44,7 @@ export function ProjectList(props) {
             </TableRow>
         </TableHeader>
         <TableBody>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>laramies/theHarvester</strong>
-                    <br/>theHarvester is a simple to use, yet powerful tool designed to be used during the
-                    reconnaissance stage of a red
-                    team assessment or penetration test.</TableCell>
-                <TableCell>Needs a Windows UI that limits arguments to small subset - see Discord discussion</TableCell>
-                <TableCell>Python, Dockerfile</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell scope="row">
-                    <strong>Datalux/Osintgram</strong>
-                    <br/>Osintgram is a OSINT tool on Instagram to collect, analyze, and run reconnaissance.</TableCell>
-                <TableCell>Work with Python 3.9 on Windows 7</TableCell>
-                <TableCell>Python, Makefile, Dockerfile</TableCell>
-            </TableRow>
+            {projects.map(getProjectRow)}
         </TableBody>
     </Table>
 

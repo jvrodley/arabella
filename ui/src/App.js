@@ -16,9 +16,12 @@ function App() {
     function setNeedListFromChild(needs) {
         setNeeds(needs)
     }
+    function setProjectListFromChild(projects) {
+        setProjects(projects)
+    }
 
     let the_need_list = <NeedList needs={needs} setNeedListFromChild={setNeedListFromChild} />
-    let my_project_list = <ProjectList projects={projects} />
+    let my_project_list = <ProjectList projects={projects}  setProjectListFromChild={setProjectListFromChild} />
 
     let my_project_heading = "My Projects"
     let current_needs_heading = "Current Needs"

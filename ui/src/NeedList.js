@@ -34,13 +34,13 @@ export function NeedList(props) {
     function getNeedRow(row, index, arr) {
         return <TableRow>
             <TableCell scope="row">
-                <strong><a href={row.original_github_url} target={"_blank"} >{row.original_github_owner}/{row.project}</a></strong>
-                <br />{row.original_github_description}</TableCell>
+                <strong><a href={row.original_github_url}
+                           target={"_blank"}>{row.original_github_owner}/{row.project}</a></strong>
+                <br/>{row.original_github_description}</TableCell>
             <TableCell>{row.description}</TableCell>
             <TableCell>{row.languages}</TableCell>
-            <TableCell><Button label={"Claim"} onClick={(e) => claimRow(row, e)} /></TableCell>
-    </TableRow>
-
+            <TableCell><Button label={"Claim"} onClick={(e) => claimRow(row, e)}/></TableCell>
+        </TableRow>
     }
 
     let the_need_list = <Table>
