@@ -25,8 +25,6 @@ const app = express();
 
 // Get port, or default to 3000
 const PORT = process.env.PORT || 3000;
-// Parse request body and verifies incoming requests using discord-interactions package
-// app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
 const all_routes = import('./allroutes.js').router;
 
@@ -57,6 +55,9 @@ app.post('/fork',  async function (req, res) {
   let needs = await forkGithubRepo("febinrev", "arithmo-gather", 100)
   return res.status(200).json(needs);
 });
+
+// Parse request body and verifies incoming requests using discord-interactions package
+app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
