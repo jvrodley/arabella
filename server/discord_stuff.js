@@ -66,12 +66,12 @@ export async function discord_interaction(req, res ) {
 
 
             let result = await addNeed(need)
-            await makeTheChannel(result.channelName )
+            let inviteLink = await makeTheChannel(result.channelName )
             return res.send({
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data: {
                     // Fetches a random emoji to send from a helper function
-                    content: 'Project added with ID A007609' + result.needid,
+                    content: 'Project added with ID A007609' + result.needid + ' Invite link: ' + inviteLink,
                 },
             });
         }
@@ -234,7 +234,7 @@ async function makeTheChannel(channelName) {
     console.log("channel = " + JSON.stringify(channel))
     let invitelink = await getInviteLink(client, channel)
     console.log("invite link = " + invitelink)
-
+    return(invitelink)
 }
 
 async function getInviteLink(client,channel) {
