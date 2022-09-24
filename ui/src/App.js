@@ -17,7 +17,7 @@ function App() {
         const fetchData = async () => {
             console.log("useEffect fetchData")
             let x = await getNeeds('arabella.rodley.com', 3000)
-            console.log("needs " + JSON.stringify(x))
+            console.log("rendering useEffect setting needs " + JSON.stringify(x))
             setNeeds(JSON.parse(JSON.stringify(x)))
         }
         fetchData();
