@@ -235,7 +235,7 @@ async function makeTheChannel(channelName) {
 async function getInviteLink(client,channelName) {
 
     let guild = client.guilds.fetch(process.env.GUILD_ID)
-    let channel = (await guild).channels.cache.find(channelName)
+    let channel = await guild.channels.cache.find(channel => channel.name === channelName)
     console.log("channel = " + JSON.stringify(channel))
 //    const invite = await channel[0].createInvite({
  //       maxUses: 1
