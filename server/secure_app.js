@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import moment from 'moment';
 import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js';
 import {
   NEED_COMMAND,
@@ -77,7 +78,9 @@ app.post('/interactions', async function (req, res) {
 });
 
 app.get('/healthcheck',  async function (req, res) {
-  return res.status(200).send("Hey it worked!");
+  let datetime = moment(new Date().getMilliseconds()).format("LLLL")
+
+return res.status(200).send("Healthcheck okay at "+datetime);
 });
 
 // var httpServer = http.createServer(app);
