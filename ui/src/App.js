@@ -14,7 +14,7 @@ function App() {
     const [projects, setProjects] = useState([])
 
     function setNeedListFromChild(needs) {
-        setNeeds({needs: needs})
+        setNeeds(needs)
     }
 
     let the_need_list = <NeedList needs={needs} setNeedListFromChild={setNeedListFromChild} />
