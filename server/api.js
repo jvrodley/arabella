@@ -22,6 +22,10 @@
  */
 
 import pg from 'pg'
+import {Octokit} from 'octokit';
+
+
+
 const Pool = pg.Pool
 
 const endPool = () => {
@@ -62,11 +66,50 @@ export async function getAllNeeds() {
     })
 }
 
+export async function getLanguages(owner, repo) {
+    // https://docs.github.com/en/rest/repos/repos#list-repository-languages
+
+    const octokit = new Octokit({
+        auth: 'YOUR-TOKEN'
+    })
+
+    let ret = await octokit.request('POST /repos/{owner}/{repo}/languagess')
+
+    console.log("return from dispatches call " + JSON.stringify(ret))
+}
+
+export async function getRepoMetadata(owner, repo) {
+    // https://docs.github.com/en/rest/repos/repos#get-a-repository
+    // Octokit.js
+// https://github.com/octokit/core.js#readme
+    const octokit = new Octokit({
+        auth: 'YOUR-TOKEN'
+    })
+
+    let ret = await octokit.request('PATCH /repos/{owner}/{repo}', {
+        owner: 'OWNER',
+        repo: 'REPO',
+        name: 'Hello-World',
+        description: 'This is your first repository',
+        homepage: 'https://github.com',
+        'private': true,
+        has_issues: true,
+        has_projects: true,
+        has_wiki: true
+    })
+
+    console.log("return from repo metadata call " + JSON.stringify(ret))
+}
+
 export async function addNeed(need) {
     console.log("addNeed " + JSON.stringify(need))
+    let ret = GetOwnerProjectFromURL(need.original_github_url)
+    let metadata = getRepoMetadata(ret.owner, ret.project)
+    let languages = getLanguages(ret.owner, ret.project)
+    
     return new Promise(function(resolve, reject) {
-        pool.query("INSERT INTO need (original_github_url, original_github_owner, original_github_description, description, target_os_name,target_os_version, target_name1, target_version1, languages) VALUES ($1,$2,$3,$4,$5, $6, $7, $8, $9) RETURNING *",
-            [need.original_github_url, need.original_github_owner, need.original_github_description, need.description,  need.target_os_name, need.target_os_version, need.target_name1, need.target_version1, need.languages], (error, results) => {
+        pool.query("INSERT INTO need (original_github_url, project, original_github_owner, original_github_description, description, target_os_name,target_os_version, target_name1, target_version1, languages) VALUES ($1,$2,$3,$4,$5, $6, $7, $8, $9) RETURNING *",
+            [need.original_github_url, ret.project, ret.owner, need.original_github_description, need.description,  need.target_os_name, need.target_os_version, need.target_name1, need.target_version1, need.languages], (error, results) => {
                 if (error) {
                     reject(error)
                 } else {
@@ -76,4 +119,24 @@ export async function addNeed(need) {
     })
 }
 
+export function GetOwnerProjectFromURL(repo) {
+    //		util.Debug(fmt.Sprintf("Repository %s", url ))
+    // git+https://github.com/evanw/node-source-map-support.git
+    // get the second to last element
+    let ret = {
+        owner: "",
+        project: ""
+    }
 
+    let elements = repo.split("/")
+    if( elements.length() < 2 ) {
+        return ret
+    }
+    ret.owner = elements[elements.length() - 2]
+    let longproject = elements[elements.length() - 1]
+    elements = longproject.split(".")
+    ret.project = elements[0]
+
+    return ret
+
+}

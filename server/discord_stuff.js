@@ -45,16 +45,16 @@ export async function discord_interaction(req, res ) {
 
             // Send a message into the channel where command was triggered from
             let need = {
-                original_github_url: getNamedField(req, 'url'),
+                original_github_url: getNamedDiscordOptionField(req, 'url'),
                 original_github_owner: 'original owner',
-                description: getNamedField(req, 'description'),
-                target_os_name: getNamedField(req, 'target_os_name'),
-                target_os_version: getNamedField(req, 'target_os_version'),
-                target_name1: getNamedField(req, 'target_name1'),
-                target_version1: getNamedField(req, 'target_version1'),
-                target_name2: getNamedField(req, 'target_name2'),
-                target_version2: getNamedField(req, 'target_version2'),
-                languages: getNamedField(req, 'languages')
+                description: getNamedDiscordOptionField(req, 'description'),
+                target_os_name: getNamedDiscordOptionField(req, 'target_os_name'),
+                target_os_version: getNamedDiscordOptionField(req, 'target_os_version'),
+                target_name1: getNamedDiscordOptionField(req, 'target_name1'),
+                target_version1: getNamedDiscordOptionField(req, 'target_version1'),
+                target_name2: getNamedDiscordOptionField(req, 'target_name2'),
+                target_version2: getNamedDiscordOptionField(req, 'target_version2'),
+                languages: getNamedDiscordOptionField(req, 'languages')
             }
             let result = await addNeed(need)
             return res.send({
@@ -184,8 +184,8 @@ export async function discord_interaction(req, res ) {
     }
 }
 
-function getNamedField( req, name ) {
-    console.log("getNamedField " + name)
+function getNamedDiscordOptionField( req, name ) {
+    console.log("getNamedDiscordOptionField " + name)
     for( let i = 0; i < req.body.data.options.length; i++ ) {
         console.log("Comparing " + name + " to " + req.body.data.options[i].name )
         if( req.body.data.options[i].name === name ) {
