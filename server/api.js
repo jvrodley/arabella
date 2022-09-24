@@ -21,12 +21,27 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import pool from './arabella_db.js'
-
-import fs from "fs";
+import pg from 'pg'
+const Pool = pg.Pool
 
 const endPool = () => {
     pool.end()
+}
+let arabella_db_config = {
+    "host": "localhost",
+    "user": "postgres",
+    "password": "postgres",
+    "database": "arabella",
+    "port": "5432"
+}
+
+let pool
+
+try {
+    pool = new Pool(arabella_db_config);
+} catch(e) {
+    console.log("No database connection " + e)
+    process.exit(1)
 }
 
 export async function getAllNeeds() {
@@ -45,3 +60,5 @@ export async function getAllNeeds() {
         })
     })
 }
+
+
