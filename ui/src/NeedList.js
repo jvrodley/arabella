@@ -20,14 +20,11 @@ export function NeedList(props) {
     }, [])  // eslint-disable-line react-hooks/exhaustive-deps
 
 
-    function claimRow(ev) {
-        console.log("Claiming row " +ev)
+    function claimRow(row, ev) {
+        console.log("Claiming row " +JSON.stringify(row))
         const fetchData = async () => {
             console.log("claimRow fetchData")
-            let owner = 'boshez'
-            let project = 'namevariation'
-            let claimid = 200
-            let x = await claimAndFork('arabella.rodley.com', 3000, owner, project, claimid)
+            let x = await claimAndFork('arabella.rodley.com', 3000, row.owner, row.project, row.needid)
             console.log("rendering useEffect setting needs " + JSON.stringify(x))
         }
         fetchData();
@@ -41,8 +38,8 @@ export function NeedList(props) {
                 <br />{row.original_github_description}</TableCell>
             <TableCell>{row.description}</TableCell>
             <TableCell>{row.languages}</TableCell>
-            <TableCell><Button label={"Claim"} onClick={claimRow}/> </TableCell>
-        </TableRow>
+            <TableCell><Button label={"Claim"} onClick={(e) => claimRow(row, e)} /></TableCell>
+    </TableRow>
 
     }
 

@@ -14,7 +14,7 @@ export async function getNeeds(host, port) {
     })
 }
 
-export async function claimAndFork(host, port, owner, project, claimid) {
+export async function claimAndFork(host, port, owner, project, needid) {
     console.log("claimAndFork calling out to api")
 
     fetch('https://'+host+':' + port + '/fork', {
@@ -22,7 +22,7 @@ export async function claimAndFork(host, port, owner, project, claimid) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({owner: owner, project: project, claimid: claimid }),
+        body: JSON.stringify({owner: owner, project: project, needid: needid }),
     })
         .then(response => {
             return response.text();
