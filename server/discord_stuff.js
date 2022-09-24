@@ -232,10 +232,9 @@ async function makeTheChannel(channelName) {
 
 }
 
-const getInviteLink = async (client,channelName)=> {
+async function getInviteLink(client,channelName) {
 
     let guild = client.guilds.fetch(process.env.GUILD_ID)
-
     let channel = (await guild).channels.cache.find(channelName)
     console.log("channel = " + JSON.stringify(channel))
     const invite = await channel[0].createInvite({
@@ -244,5 +243,3 @@ const getInviteLink = async (client,channelName)=> {
     return (`https://discord.gg/${invite.code}`);
 
 }
-
-getInviteLink().then(link => console.log(`${link}`))
