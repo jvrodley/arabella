@@ -185,9 +185,11 @@ export async function discord_interaction(req, res ) {
 }
 
 function getNamedField( req, name ) {
+    console.log("getNamedField " + name)
     for( let i = 0; i < req.body.data.options.length; i++ ) {
-        if( req.body.data.options[0].name === name ) {
-            return (req.body.data.options[0].value)
+        console.log("Comparing " + name + " to " + req.body.data.options[i].name )
+        if( req.body.data.options[i].name === name ) {
+            return (req.body.data.options[i].value)
         }
     }
     return ''
