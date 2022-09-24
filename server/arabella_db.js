@@ -38,7 +38,7 @@ let pool
 try {
     pool = new Pool(arabella_db_config);
 } catch(e) {
-    log.info("No database connection " + e)
+    console.log("No database connection " + e)
     process.exit(1)
 }
 
@@ -47,7 +47,7 @@ try {
     }
 
     exports.testConnection = async function (failfunc) {
-        log.info("testConnection")
+        console.log("testConnection")
         return new Promise(function (resolve, reject) {
             pool.query("SELECT * FROM public.user",
                 function (err, results) {
@@ -62,3 +62,5 @@ try {
 
 
     }
+
+    module.exports = pool
