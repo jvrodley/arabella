@@ -14,7 +14,7 @@ function App() {
         const fetchData = async () => {
             console.log("useEffect fetchData")
             let x = await getNeeds('localhost', 3000)
-            log.trace("needs " + JSON.stringify(x))
+            console.log("needs " + JSON.stringify(x))
             setNeeds(x)
         }
         fetchData();
