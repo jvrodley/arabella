@@ -121,7 +121,8 @@ export async function addNeed(need) {
                 if (error) {
                     reject(error)
                 } else {
-                    resolve({needid: results.rows[0].needid, message: "A new need has been added :" + results.rows[0].needid})
+                    let channelName = need.original_github_owner + "_" + project
+                    resolve({channelName: channelName, needid: results.rows[0].needid, message: "A new need has been added :" + results.rows[0].needid})
                 }
             })
     })

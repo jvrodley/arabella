@@ -65,7 +65,7 @@ export async function discord_interaction(req, res ) {
 
 
             let result = await addNeed(need)
-            await makeTheChannel(need.original_github_owner + "_" + result.needid)
+            await makeTheChannel(result.channelName )
             return res.send({
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data: {
