@@ -20,19 +20,18 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-const log = require("../../bubbles_logger").log
 
 const server_db = require('./arabella_db.js')
 const pool = server_db.getPool()
 
-const fs = require("fs");
+import fs from "fs";
 
 const endPool = () => {
     pool.end()
 }
 
 export async function getAllNeeds() {
-    log.info("needs getAllNeeds")
+    console.log("needs getAllNeeds")
     return new Promise(function (resolve, reject) {
         let ssql = "select * from need n order by needid desc"
         pool.query(ssql, (error, results) => {
