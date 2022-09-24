@@ -225,7 +225,7 @@ async function makeTheChannel(channelName) {
         name: channelName,
         type: 0 // text
     };
-    const channel = (await guild).channels.create( createOptions );
+    const channel = await guild.channels.create( createOptions );
     console.log("channel = " + JSON.stringify(channel))
     let invitelink = await getInviteLink(client, channelName)
     console.log("invite link = " + invitelink)
@@ -237,9 +237,9 @@ async function getInviteLink(client,channelName) {
     let guild = client.guilds.fetch(process.env.GUILD_ID)
     let channel = (await guild).channels.cache.find(channelName)
     console.log("channel = " + JSON.stringify(channel))
-    const invite = await channel[0].createInvite({
-        maxUses: 1
-    });
-    return (`https://discord.gg/${invite.code}`);
-
+//    const invite = await channel[0].createInvite({
+ //       maxUses: 1
+//    });
+//    return (`https://discord.gg/${invite.code}`);
+return("");
 }
