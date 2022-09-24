@@ -64,12 +64,12 @@ export const NEED_COMMAND = {
   description: 'Command to add a need to the list',
   type: 1,
   options: [
-    { type: 3, name: 'needer_discord_handle', description:'discordaddr', required: false },
-    { type: 3, name: 'invite_email_address', description:'email', required: false },
     { type: 3, name: 'url', description:'Enter the project URL', required: true },
     { type: 3, name: 'description', description:'What work is needed', required: true },
-    { type: 3, name: 'target_os_name', description:'What OS', required: true },
-    { type: 3, name: 'target_os_version', description:'What OS version', required: true },
+    { type: 3, name: 'needer_discord_handle', description:'handle', required: false },
+    { type: 3, name: 'invite_email_address', description:'email', required: false },
+    { type: 3, name: 'target_os_name', description:'OS', required: true },
+    { type: 3, name: 'target_os_version', description:'OSver', required: true },
     { type: 3, name: 'other_target_name', description:'Language engine name', required: false },
     { type: 3, name: 'other_target_version', description:'Language engine version', required: false },
   ]
