@@ -165,3 +165,22 @@ export function GetOwnerProjectFromURL(repo) {
     return ret
 
 }
+
+export async function forkGithubRepo( owner, project, claimid ) {
+    const octokit = new Octokit({
+        auth: process.env.MY_GITHUB_TOKEN
+    })
+
+    let ret = await octokit.rest.repos.createFork({
+        owner: owner,
+        repo: project,
+        name: project+"_"+claimid,
+        default_branch_only: true
+    });
+
+    console.log("return from languages call comes from " + JSON.stringify(ret.data))
+    let languages = Object.keys(ret.data)
+    console.log("return from languages call "+languages)
+    return(JSON.stringify(languages))
+
+}

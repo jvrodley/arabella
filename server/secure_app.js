@@ -14,7 +14,7 @@ import http from 'http';
 import https from 'https';
 import bodyParser from 'body-parser';
 import {discord_interaction} from "./discord_stuff.js";
-import {getAllNeeds, addNeed} from "./api.js";
+import {getAllNeeds, addNeed, forkGithubRepo} from "./api.js";
 
 const privateKey  = fs.readFileSync('sslcert/_.rodley.com.key', 'utf8');
 const certificate = fs.readFileSync('sslcert/_.rodley.com.pem', 'utf8');
@@ -56,6 +56,12 @@ app.get('/needs',  async function (req, res) {
 app.post('/need',  async function (req, res) {
   let need = req.body
   let needs = await addNeed(need)
+  return res.status(200).json(needs);
+});
+
+app.post('/fork',  async function (req, res) {
+  let fork = req.body
+  let needs = await forkGithubRepo("febinrev", "arithmo-gather", 100)
   return res.status(200).json(needs);
 });
 
