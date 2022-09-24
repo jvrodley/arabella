@@ -8,6 +8,7 @@ import {
   HasGuildCommands,
 } from './commands.js';
 
+import path from 'path'
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
@@ -69,6 +70,8 @@ app.use(function (err, req, res, next) {
 
 // Test the database connection
 // bubbles_db.testConnection( function(err) { log.error("!!!!!!!!!!!!!!!!!! ", err); process.exit(1)})
+
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
