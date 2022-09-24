@@ -21,7 +21,7 @@ export function NeedList(props) {
 
 
     function claimRow(ev) {
-        console.log("Claiming row " + JSON.stringify(ev))
+        console.log("Claiming row " +ev)
         const fetchData = async () => {
             console.log("claimRow fetchData")
             let owner = 'boshez'
