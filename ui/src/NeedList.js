@@ -1,7 +1,7 @@
 import {Button, Table, TableBody, TableCell, TableHeader, TableRow} from "grommet";
 import {useState} from "react";
 
-function NeedList(props) {
+export function NeedList(props) {
 
     const [needs, setNeeds] = useState(props.needs)
 

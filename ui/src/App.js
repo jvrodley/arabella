@@ -6,6 +6,7 @@ import { hp } from 'grommet-theme-hp';
 import {useState, useEffect} from 'react'
 import {getNeeds} from './utils'
 import {NeedList} from './NeedList'
+import {ProjectList} from './ProjectList'
 
 function App() {
 

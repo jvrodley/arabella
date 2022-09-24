@@ -1,7 +1,7 @@
 import {Button, Table, TableBody, TableCell, TableHeader, TableRow} from "grommet";
 import {useState} from "react";
 
-function ProjectList(props) {
+export function ProjectList(props) {
 
     const [projects, setProjects] = useState(props.projects)
     let project_list = <Table>
@@ -42,4 +42,4 @@ function ProjectList(props) {
 
 }
 
-export default NeedList;
+export default ProjectList;
