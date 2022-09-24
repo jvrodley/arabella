@@ -3,6 +3,7 @@ import {useState} from "react";
 
 export function NeedList(props) {
 
+    console.log("NeedList rerendering with props.need set to " + JSON.stringify(props.needs))
     const [needs, setNeeds] = useState(props.needs)
 
     function claimRow(ev) {

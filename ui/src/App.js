@@ -18,7 +18,7 @@ function App() {
             console.log("useEffect fetchData")
             let x = await getNeeds('arabella.rodley.com', 3000)
             console.log("needs " + JSON.stringify(x))
-            setNeeds(x)
+            setNeeds(JSON.parse(JSON.stringify(x)))
         }
         fetchData();
     }, [])  // eslint-disable-line react-hooks/exhaustive-deps
@@ -28,7 +28,7 @@ function App() {
     let the_need_list = <NeedList needs={needs} />
     let my_project_list = <ProjectList projects={projects} />
 
-        let my_project_heading = "My Projects"
+    let my_project_heading = "My Projects"
     let current_needs_heading = "Current Needs"
 
     const [the_list, setTheList] = useState(the_need_list)
