@@ -74,7 +74,10 @@ export async function getLanguages(owner, repo) {
         auth: process.env.MY_GITHUB_TOKEN
     })
 
-    let ret = await octokit.request('POST /repos/'+owner+'/'+repo+'/languages')
+    let ret = await octokit.rest.repos.listLanguages({
+        owner,
+        repo,
+    });
 
     console.log("return from dispatches call " + JSON.stringify(ret))
 }
@@ -88,8 +91,10 @@ export async function getRepoMetadata(owner, repo) {
         auth: process.env.MY_GITHUB_TOKEN
     })
 
-    let ret = await octokit.request('GET /repos/'+owner+'/'+repo)
-
+    let ret = octokit.rest.repos.get({
+        owner,
+        repo,
+    });
     console.log("return from repo metadata call " + JSON.stringify(ret))
 }
 
