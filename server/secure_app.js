@@ -12,7 +12,6 @@ import path from 'path'
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
-import bodyParser from 'body-parser';
 import {discord_interaction} from "./discord_stuff.js";
 import {getAllNeeds, addNeed, forkGithubRepo} from "./api.js";
 
@@ -50,7 +49,9 @@ app.post('/need',  async function (req, res) {
   return res.status(200).json(needs);
 });
 
+app.use(express.json())
 app.post('/fork',  async function (req, res) {
+  console.log("req.body = " + JSON.stringify(req.body));
   console.log("req.params = " + JSON.stringify(req.params));
   let needs = await forkGithubRepo(req.body.owner, req.body.project, req.body.claimid)
   return res.status(200).json(needs);
