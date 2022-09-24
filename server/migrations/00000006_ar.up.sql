@@ -1,0 +1,1 @@
+ALTER TABLE "need" ADD COLUMN invite_email_address VARCHAR(1024);

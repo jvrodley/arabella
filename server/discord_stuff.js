@@ -42,7 +42,7 @@ export async function discord_interaction(req, res ) {
         const {name} = data;
 
         // "need" guild command
-        if (name === 'a2') {
+        if (name === 'a3') {
             // Add the need to the database
 
             console.log("OPTIONS = " + JSON.stringify(req.body.data.options));
@@ -59,7 +59,8 @@ export async function discord_interaction(req, res ) {
                 target_version1: getNamedDiscordOptionField(req.body.data, 'other_target_version'),
                 target_name2: getNamedDiscordOptionField(req.body.data, 'target_name2'),
                 target_version2: getNamedDiscordOptionField(req.body.data, 'target_version2'),
-                languages: getNamedDiscordOptionField(req.body.data, 'languages')
+                languages: getNamedDiscordOptionField(req.body.data, 'languages'),
+                invite_email_address: getNamedDiscordOptionField(req.body.data, 'invite_email_address'),
             }
 
 

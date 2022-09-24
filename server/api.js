@@ -120,8 +120,8 @@ export async function addNeed(need) {
     }
 
     return new Promise(function(resolve, reject) {
-        pool.query("INSERT INTO need (needer_discord_handle, original_github_url, project, original_github_owner, original_github_description, description, target_os_name,target_os_version, target_name1, target_version1, languages) VALUES ($1,$2,$3,$4,$5, $6, $7, $8, $9, $10, $11) RETURNING *",
-            [need.needer_discord_handle, need.original_github_url, ret.project, ret.owner, need.original_github_description, need.description,  need.target_os_name, need.target_os_version, need.target_name1, need.target_version1, need.languages], (error, results) => {
+        pool.query("INSERT INTO need (needer_discord_handle,invite_email_address, original_github_url, project, original_github_owner, original_github_description, description, target_os_name,target_os_version, target_name1, target_version1, languages) VALUES ($1,$2,$3,$4,$5, $6, $7, $8, $9, $10, $11, $12) RETURNING *",
+            [need.needer_discord_handle,need.invite_email_address, need.original_github_url, ret.project, ret.owner, need.original_github_description, need.description,  need.target_os_name, need.target_os_version, need.target_name1, need.target_version1, need.languages], (error, results) => {
                 if (error) {
                     reject(error)
                 } else {

@@ -60,11 +60,12 @@ function createCommandChoices() {
 
 // Simple test command
 export const NEED_COMMAND = {
-  name: 'a2',
+  name: 'a3',
   description: 'Command to add a need to the list',
   type: 1,
   options: [
-    { type: 3, name: 'needer_discord_handle', description:'who', required: true },
+    { type: 3, name: 'needer_discord_handle', description:'discordaddr', required: false },
+    { type: 3, name: 'invite_email_address', description:'email', required: false },
     { type: 3, name: 'url', description:'Enter the project URL', required: true },
     { type: 3, name: 'description', description:'What work is needed', required: true },
     { type: 3, name: 'target_os_name', description:'What OS', required: true },
