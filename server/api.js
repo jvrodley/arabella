@@ -21,8 +21,8 @@
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import server_db from './arabella_db.js'
-const pool = server_db.getPool()
+import getPool from './arabella_db.js'
+const pool = getPool()
 
 import fs from "fs";
 

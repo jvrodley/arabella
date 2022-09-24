@@ -20,14 +20,10 @@
  * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
  * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-const log = require("../../bubbles_logger").log
 
-const locals = require("../../config/locals");
-const db = require("./database");
-const {sql} = require("@databases/pg");
 
-const Pool = require('pg').Pool
-
+import pg from 'pg'
+const Pool = pg.Pool
 log.info('Creating initial arabella database connection' );
 
 let arabella_db_config = {
@@ -46,24 +42,23 @@ try {
     process.exit(1)
 }
 
+    exports.getPool = () => {
+        return (pool)
+    }
 
-exports.getPool = () => {
-    return(pool)
-}
-
-exports.testConnection = async function(failfunc) {
-    log.info("testConnection")
-    return new Promise(function (resolve, reject) {
-        pool.query("SELECT * FROM public.user",
-            function (err, results) {
-                if (err) {
-                    failfunc(err)
-                } else {
-                    resolve(results)
+    exports.testConnection = async function (failfunc) {
+        log.info("testConnection")
+        return new Promise(function (resolve, reject) {
+            pool.query("SELECT * FROM public.user",
+                function (err, results) {
+                    if (err) {
+                        failfunc(err)
+                    } else {
+                        resolve(results)
+                    }
                 }
-            }
-        )
-    })
-}
+            )
+        })
 
 
+    }
