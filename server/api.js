@@ -167,6 +167,7 @@ export function GetOwnerProjectFromURL(repo) {
 }
 
 export async function forkGithubRepo( owner, project, claimid ) {
+    console.log("forkGithubRepo "+owner+","+project+","+claimid)
     const octokit = new Octokit({
         auth: process.env.MY_GITHUB_TOKEN
     })
@@ -181,4 +182,38 @@ export async function forkGithubRepo( owner, project, claimid ) {
     console.log("return from createFork call "+JSON.stringify(ret))
     return(ret)
 
+}
+
+export async function claimProject( needid, userid ) {
+    console.log("claimProject "+needid+","+userid)
+    const octokit = new Octokit({
+        auth: process.env.MY_GITHUB_TOKEN
+    })
+    return new Promise(function(resolve, reject) {
+        pool.query("INSERT INTO claim (needid_need, userid_user, forked_github_owner, forked_github_url ) VALUES ($1,$2,'','') RETURNING *",
+            [needid, userid], (error, results) => {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve({claimid: results.rows[0].claimid} )
+                }
+            })
+    })
+}
+
+export async function updateClaim( claimid, forked_github_owner, forked_github_url ) {
+    console.log("updateClaim "+claimid+","+forked_github_owner+','+forked_github_url)
+    const octokit = new Octokit({
+        auth: process.env.MY_GITHUB_TOKEN
+    })
+    return new Promise(function(resolve, reject) {
+        pool.query("UPDATE claim set forked_github_owner=$1, forked_github_url=$2 where claimid=$3",
+            [forked_github_owner, forked_github_url, claimid], (error, results) => {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve({claimid: results.rows[0].claimid} )
+                }
+            })
+    })
 }

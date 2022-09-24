@@ -13,7 +13,7 @@ import fs from 'fs';
 import http from 'http';
 import https from 'https';
 import {discord_interaction} from "./discord_stuff.js";
-import {getAllNeeds, addNeed, forkGithubRepo} from "./api.js";
+import {getAllNeeds, addNeed, forkGithubRepo, updateClaim, claimProject} from "./api.js";
 
 const privateKey  = fs.readFileSync('sslcert/_.rodley.com.key', 'utf8');
 const certificate = fs.readFileSync('sslcert/_.rodley.com.pem', 'utf8');
@@ -43,18 +43,21 @@ app.get('/needs',  async function (req, res) {
   return res.status(200).json(needs);
 });
 
+app.use(express.json())
+
 app.post('/need',  async function (req, res) {
   let need = req.body
   let needs = await addNeed(need)
   return res.status(200).json(needs);
 });
 
-app.use(express.json())
 app.post('/fork',  async function (req, res) {
   console.log("req.body = " + JSON.stringify(req.body));
   console.log("req.params = " + JSON.stringify(req.params));
-  let needs = await forkGithubRepo(req.body.owner, req.body.project, req.body.claimid)
-  return res.status(200).json(needs);
+  let claim = await claimProject( req.body.needid, 1 )
+  let forked_repo = await forkGithubRepo(req.body.owner, req.body.project, req.body.claimid)
+  let updated_claim = await updateClaim(claim.claimid, forked_repo.data.owner.login, forked_repo.data.url)
+  return res.status(200).json(claim);
 });
 
 // Parse request body and verifies incoming requests using discord-interactions package
