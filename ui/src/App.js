@@ -10,22 +10,14 @@ import {ProjectList} from './ProjectList'
 
 function App() {
 
-    const [needs, setNeeds] = useState({needs:[]})
-    const [projects, setProjects] = useState({projects:[]})
+    const [needs, setNeeds] = useState([])
+    const [projects, setProjects] = useState([])
 
-    useEffect(() => {
-        const fetchData = async () => {
-            console.log("useEffect fetchData")
-            let x = await getNeeds('arabella.rodley.com', 3000)
-            console.log("rendering useEffect setting needs " + JSON.stringify(x))
-            setNeeds({needs: JSON.parse(JSON.stringify(x))})
-        }
-        fetchData();
-    }, [])  // eslint-disable-line react-hooks/exhaustive-deps
+    function setNeedListFromChild(needs) {
+        setNeeds({needs: needs})
+    }
 
-
-
-    let the_need_list = <NeedList needs={needs.needs} />
+    let the_need_list = <NeedList needs={needs} setNeedListFromChild={setNeedListFromChild} />
     let my_project_list = <ProjectList projects={projects} />
 
     let my_project_heading = "My Projects"

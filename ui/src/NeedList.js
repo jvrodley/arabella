@@ -1,10 +1,23 @@
 import {Button, Table, TableBody, TableCell, TableHeader, TableRow} from "grommet";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {getNeeds} from "./utils";
 
 export function NeedList(props) {
 
     console.log("NeedList rerendering with props.need set to " + JSON.stringify(props.needs))
     const [needs, setNeeds] = useState(props.needs)
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log("useEffect fetchData")
+            let x = await getNeeds('arabella.rodley.com', 3000)
+            console.log("rendering useEffect setting needs " + JSON.stringify(x))
+            props.setNeedListFromChild(JSON.parse(JSON.stringify(x)))
+        }
+        fetchData();
+    }, [])  // eslint-disable-line react-hooks/exhaustive-deps
+
 
     function claimRow(ev) {
         alert("Claiming row " + JSON.stringify(ev))
