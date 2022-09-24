@@ -36,13 +36,6 @@ const router = express.Router();
 app.use(express.static('/home/admin/arabella/server/client/build'));
 // app.use(express.static('C:/Users/john/Documents/go/src/arabella/server/client/build'));
 
-/**
- * Interactions endpoint URL where Discord will send HTTP requests
- */
-app.post('/interactions', async function (req, res) {
-  return( discord_interaction(req,res))
-});
-
 app.get('/healthcheck',  async function (req, res) {
   let datetime = moment(new Date().getMilliseconds()).format("LLLL")
   return res.status(200).send("Healthcheck okay at " + datetime);
@@ -64,6 +57,14 @@ app.post('/fork',  async function (req, res) {
   let needs = await forkGithubRepo("febinrev", "arithmo-gather", 100)
   return res.status(200).json(needs);
 });
+
+/**
+ * Interactions endpoint URL where Discord will send HTTP requests
+ */
+app.post('/interactions', async function (req, res) {
+  return( discord_interaction(req,res))
+});
+
 
 // var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);

@@ -178,9 +178,7 @@ export async function forkGithubRepo( owner, project, claimid ) {
         default_branch_only: true
     });
 
-    console.log("return from languages call comes from " + JSON.stringify(ret.data))
-    let languages = Object.keys(ret.data)
-    console.log("return from languages call "+languages)
-    return(JSON.stringify(languages))
+    console.log("return from createFork call "+JSON.stringify(ret))
+    return(ret)
 
 }
