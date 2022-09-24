@@ -13,7 +13,7 @@ import fs from 'fs';
 import http from 'http';
 import https from 'https';
 import {discord_interaction} from "./discord_stuff.js";
-import {getAllNeeds, addNeed, forkGithubRepo, updateClaim, claimProject} from "./api.js";
+import {getAllNeeds, getAllClaims, addNeed, forkGithubRepo, updateClaim, claimProject} from "./api.js";
 
 const privateKey  = fs.readFileSync('sslcert/_.rodley.com.key', 'utf8');
 const certificate = fs.readFileSync('sslcert/_.rodley.com.pem', 'utf8');
@@ -40,6 +40,11 @@ app.get('/healthcheck',  async function (req, res) {
 
 app.get('/needs/:userid',  async function (req, res) {
   let needs = await getAllNeeds(req.params.userid)
+  return res.status(200).json(needs);
+});
+
+app.get('/claims/:userid',  async function (req, res) {
+  let needs = await getAllClaims(req.params.userid)
   return res.status(200).json(needs);
 });
 
