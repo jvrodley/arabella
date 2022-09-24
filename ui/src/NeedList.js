@@ -27,7 +27,7 @@ export function NeedList(props) {
     function getNeedRow(row, index, arr) {
         return <TableRow>
             <TableCell scope="row">
-                <strong>{row.original_github_url}</strong>
+                <strong><a href={row.original_github_url} target=_blank>{row.original_github_owner}/{row.project}</a></strong>
                 <br />{row.original_github_description}</TableCell>
             <TableCell>{row.description}</TableCell>
             <TableCell>{row.languages}</TableCell>
