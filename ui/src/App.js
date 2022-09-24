@@ -10,8 +10,8 @@ import {ProjectList} from './ProjectList'
 
 function App() {
 
-    const [needs, setNeeds] = useState({})
-    const [projects, setProjects] = useState({})
+    const [needs, setNeeds] = useState({needs:[]})
+    const [projects, setProjects] = useState({projects:[]})
 
     useEffect(() => {
         const fetchData = async () => {
