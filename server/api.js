@@ -71,7 +71,7 @@ export async function getLanguages(owner, repo) {
     // https://docs.github.com/en/rest/repos/repos#list-repository-languages
 
     const octokit = new Octokit({
-        auth: '{process.env.MY_GITHUB_TOKEN}'
+        auth: process.env.MY_GITHUB_TOKEN
     })
 
     let ret = await octokit.request('POST /repos/'+owner+'/'+repo+'/languages')
@@ -85,7 +85,7 @@ export async function getRepoMetadata(owner, repo) {
     // Octokit.js
     // https://github.com/octokit/core.js#readme
     const octokit = new Octokit({
-        auth: '{process.env.MY_GITHUB_TOKEN}'
+        auth: process.env.MY_GITHUB_TOKEN
     })
 
     let ret = await octokit.request('GET /repos/'+owner+'/'+repo, {
