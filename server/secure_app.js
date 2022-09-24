@@ -13,7 +13,7 @@ import http from 'http';
 import https from 'https';
 import bodyParser from 'body-parser';
 import {discord_interaction} from "./discord_stuff.js";
-
+import {getAllNeeds} from "./api.js";
 
 const privateKey  = fs.readFileSync('sslcert/_.rodley.com.key', 'utf8');
 const certificate = fs.readFileSync('sslcert/_.rodley.com.pem', 'utf8');
@@ -79,8 +79,12 @@ app.post('/interactions', async function (req, res) {
 
 app.get('/healthcheck',  async function (req, res) {
   let datetime = moment(new Date().getMilliseconds()).format("LLLL")
+  return res.status(200).send("Healthcheck okay at " + datetime);
+});
 
-return res.status(200).send("Healthcheck okay at "+datetime);
+app.get('/needs',  async function (req, res) {
+  let needs = getAllNeeds()
+  return res.status(200).json(needs);
 });
 
 // var httpServer = http.createServer(app);
