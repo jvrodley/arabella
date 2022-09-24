@@ -25,17 +25,20 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 // Parse request body and verifies incoming requests using discord-interactions package
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
-
+/*
 app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", "*")
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
   next();
 });
+*/
 
+/*
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+*/
 
 // global.__root   = __dirname + '/';
 
@@ -43,7 +46,7 @@ const all_routes = import('./allroutes.js').router;
 
 console.log("starting router")
 const router = express.Router();
-
+/*
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   let err = new Error('Not Found');
@@ -61,6 +64,7 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
 //    res.render('error');
 });
+*/
 
 // Test the database connection
 // bubbles_db.testConnection( function(err) { log.error("!!!!!!!!!!!!!!!!!! ", err); process.exit(1)})
