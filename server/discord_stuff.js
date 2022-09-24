@@ -18,6 +18,7 @@ import {
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
+import {addNeed} from "./api.js";
 
 export async function discord_interaction(req, res ) {
 // Interaction type and data
@@ -43,11 +44,24 @@ export async function discord_interaction(req, res ) {
             // Add the need to the database
 
             // Send a message into the channel where command was triggered from
+            let need = {
+                original_github_url: getNamedField(req, 'url'),
+                original_github_owner: 'original owner',
+                description: getNamedField(req, 'description'),
+                target_os_name: getNamedField(req, 'target_os_name'),
+                target_os_version: getNamedField(req, 'target_os_version'),
+                target_name1: getNamedField(req, 'target_name1'),
+                target_version1: getNamedField(req, 'target_version1'),
+                target_name2: getNamedField(req, 'target_name2'),
+                target_version2: getNamedField(req, 'target_version2'),
+                languages: getNamedField(req, 'languages')
+            }
+            let result = await addNeed(need)
             return res.send({
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data: {
                     // Fetches a random emoji to send from a helper function
-                    content: 'the project may have been added to the need list ',
+                    content: 'the project was added to the need list with needid ' + result.needid,
                 },
             });
         }
@@ -168,4 +182,13 @@ export async function discord_interaction(req, res ) {
             }
         }
     }
+}
+
+function getNamedField( req, name ) {
+    for( let i = 0; i < req.body.data.options.length; i++ ) {
+        if( req.body.data.options[0].name === name ) {
+            return (req.body.data.options[0].value)
+        }
+    }
+    return ''
 }
