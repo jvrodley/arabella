@@ -101,7 +101,19 @@ export async function getRepoMetadata(owner, repo) {
     console.log("return from repo metadata call " + JSON.stringify(ret))
     return( ret.data )
 }
-
+export async function setNeedInviteLink(needid,inviteLink) {
+    console.log("setNeedInviteLink " + needid + " " + inviteLink)
+    return new Promise(function(resolve, reject) {
+        pool.query("UPDATE need set invite_link=$1 where needid=$2",
+            [inviteLink,needid], (error, results) => {
+                if (error) {
+                    reject(error)
+                } else {
+                    resolve({ needid: needid, message: "Need "+needid+" has been updated :"})
+                }
+            })
+    })
+}
 export async function addNeed(need) {
     console.log("addNeed " + JSON.stringify(need))
     let ret = GetOwnerProjectFromURL(need.original_github_url)

@@ -1,0 +1,1 @@
+ALTER TABLE "need" ADD COLUMN invite_link VARCHAR(1024);

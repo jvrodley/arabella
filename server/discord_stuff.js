@@ -63,10 +63,9 @@ export async function discord_interaction(req, res ) {
                 invite_email_address: getNamedDiscordOptionField(req.body.data, 'invite_email_address'),
             }
 
-
-
             let result = await addNeed(need)
             let inviteLink = await makeTheChannel(result.channelName )
+            let x = await setNeedInviteLink(result.needid, inviteLink)
             return res.send({
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data: {
