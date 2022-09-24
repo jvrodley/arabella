@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "set NODE_ENV=&&set REACT_APP_API_HOST=&&set REACT_APP_API_HOST=&&set REACT_APP_UI_PORT=&&set REACT_APP_NODE_ENV=&&react-scripts ../server/client/build",
+    "build": "set NODE_ENV=&&set REACT_APP_API_HOST=&&set REACT_APP_API_HOST=&&set REACT_APP_UI_PORT=&&set REACT_APP_NODE_ENV=&&react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
