@@ -1,5 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
+import { GuildChannelCreateOptions, GuildChannelManagerClient, GatewayIntentBits } from 'discord.js';
+
 import {
     InteractionType,
     InteractionResponseType,
@@ -40,13 +42,14 @@ export async function discord_interaction(req, res ) {
         const {name} = data;
 
         // "need" guild command
-        if (name === 'a1') {
+        if (name === 'a2') {
             // Add the need to the database
 
             console.log("OPTIONS = " + JSON.stringify(req.body.data.options));
 
             // Send a message into the channel where command was triggered from
             let need = {
+                needer_discord_handle: getNamedDiscordOptionField(req.body.data, 'needer_discord_handle'),
                 original_github_url: getNamedDiscordOptionField(req.body.data, 'url'),
                 original_github_owner: 'original owner',
                 description: getNamedDiscordOptionField(req.body.data, 'description'),
@@ -58,7 +61,11 @@ export async function discord_interaction(req, res ) {
                 target_version2: getNamedDiscordOptionField(req.body.data, 'target_version2'),
                 languages: getNamedDiscordOptionField(req.body.data, 'languages')
             }
+
+
+
             let result = await addNeed(need)
+            await makeTheChannel(need.original_github_owner + "_" + result.needid)
             return res.send({
                 type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
                 data: {
@@ -195,4 +202,29 @@ function getNamedDiscordOptionField( data, name ) {
         }
     }
     return ''
+}
+
+async function makeTheChannel(channelName) {
+// Create a new client instance
+    const client = new Client();
+
+// When the client is ready, run this code (only once)
+    client.once('ready', () => {
+        console.log('Ready!');
+    });
+
+// Login to Discord with your client's token
+    await client.login(process.env.DISCORD_TOKEN);
+
+    let guild = client.guilds.fetch(process.env.DISCORD_GUILD_ID)
+    let options = {
+        type:"text"
+    }
+
+    const createOptions = {
+        name: channelName,
+        type: 0
+    };
+    const channel = (await guild).channels.create( createOptions );
+
 }
