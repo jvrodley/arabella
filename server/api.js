@@ -80,6 +80,8 @@ export async function getLanguages(owner, repo) {
     });
 
     console.log("return from dispatches call " + JSON.stringify(ret))
+    let languages = ret.data.keys()
+    return(languages)
 }
 
 export async function getRepoMetadata(owner, repo) {
@@ -96,14 +98,17 @@ export async function getRepoMetadata(owner, repo) {
         repo,
     });
     console.log("return from repo metadata call " + JSON.stringify(ret))
+    return( ret )
 }
 
 export async function addNeed(need) {
     console.log("addNeed " + JSON.stringify(need))
     let ret = GetOwnerProjectFromURL(need.original_github_url)
     let metadata = getRepoMetadata(ret.owner, ret.project)
+    need.original_github_description = metadata.description
     console.log("metadata is " + JSON.stringify(metadata))
-    let languages = getLanguages(ret.owner, ret.project)
+    need.original_github_url = ret.owner
+    need.languages = getLanguages(ret.owner, ret.project)
     console.log("languages is " + JSON.stringify(languages))
 
     return new Promise(function(resolve, reject) {
