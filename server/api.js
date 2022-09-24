@@ -47,11 +47,14 @@ try {
 export async function getAllNeeds() {
     console.log("needs getAllNeeds")
     return new Promise(function (resolve, reject) {
-        let ssql = "select * from need n order by needid desc"
+        let ssql = "select * from need order by needid desc"
+        console.log(ssql)
         pool.query(ssql, (error, results) => {
             if (error) {
                 reject(error)
             }
+            console.log(JSON.stringify(error))
+            console.log(JSON.stringify(results))
             if (results) {
                 resolve(results.rows);
             } else {
