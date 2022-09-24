@@ -187,7 +187,6 @@ export async function discord_interaction(req, res ) {
 function getNamedDiscordOptionField( req, name ) {
     console.log("getNamedDiscordOptionField " + name)
     for( let i = 0; i < req.body.data.options.length; i++ ) {
-        console.log("Comparing " + name + " to " + req.body.data.options[i].name )
         if( req.body.data.options[i].name === name ) {
             return (req.body.data.options[i].value)
         }

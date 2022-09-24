@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test_windows": "node_modules\\.bin\\mocha --timeout 10000  --exit __tests__\\*.js",
-    "test_linux": "node_modules/.bin/mocha --timeout 10000  --exit __tests__/*.js"
+    "test_linux": "node_modules/.bin/mocha --timeout 10000  --exit __tests__/*.js",
+    "run_production": "node secure_app"
   },
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
