@@ -83,7 +83,7 @@ app.get('/healthcheck',  async function (req, res) {
 });
 
 app.get('/needs',  async function (req, res) {
-  let needs = getAllNeeds()
+  let needs = await getAllNeeds()
   return res.status(200).json(needs);
 });
 

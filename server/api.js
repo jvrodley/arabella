@@ -54,7 +54,7 @@ export async function getAllNeeds() {
                 reject(error)
             }
             console.log(JSON.stringify(error))
-            console.log(JSON.stringify(results))
+            console.log(JSON.stringify(results.rows))
             if (results) {
                 resolve(results.rows);
             } else {
