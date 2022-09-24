@@ -10,8 +10,8 @@ import {ProjectList} from './ProjectList'
 
 function App() {
 
-    const [needs, setNeeds] = useState([])
-    const [projects, setProjects] = useState([])
+    const [needs, setNeeds] = useState({})
+    const [projects, setProjects] = useState({})
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,7 +33,6 @@ function App() {
 
     const [the_list, setTheList] = useState(the_need_list)
     const [the_heading, setTheHeading] = useState(current_needs_heading)
-
 
     function gotoProjectList() {
             setTheList( my_project_list )
