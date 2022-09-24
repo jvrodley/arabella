@@ -52,8 +52,8 @@ export async function discord_interaction(req, res ) {
                 description: getNamedDiscordOptionField(req.body.data, 'description'),
                 target_os_name: getNamedDiscordOptionField(req.body.data, 'target_os_name'),
                 target_os_version: getNamedDiscordOptionField(req.body.data, 'target_os_version'),
-                target_name1: getNamedDiscordOptionField(req.body.data, 'target_name1'),
-                target_version1: getNamedDiscordOptionField(req.body.data, 'target_version1'),
+                target_name1: getNamedDiscordOptionField(req.body.data, 'other_target_name'),
+                target_version1: getNamedDiscordOptionField(req.body.data, 'other_target_version'),
                 target_name2: getNamedDiscordOptionField(req.body.data, 'target_name2'),
                 target_version2: getNamedDiscordOptionField(req.body.data, 'target_version2'),
                 languages: getNamedDiscordOptionField(req.body.data, 'languages')
