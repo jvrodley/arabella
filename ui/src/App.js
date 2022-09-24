@@ -74,7 +74,7 @@ function App() {
                                  <Button icon={<Help/>} hoverIndicator/>
                              }>
                         <Nav gap="small">
-                            <Button icon={<Projects/>} hoverIndicator label={"Current Needs"} onClick={gotoNeedList} gotoClaimedProject={gotoClaimedProject()}/>
+                            <Button icon={<Projects/>} hoverIndicator label={"Current Needs"} onClick={gotoNeedList} gotoClaimedProject={gotoClaimedProject}/>
                             <Button icon={<Projects/>} hoverIndicator label={"My Projects"} onClick={gotoProjectList}/>
                             <Button icon={<Clock/>} hoverIndicator/>
                         </Nav>
