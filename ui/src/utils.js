@@ -14,3 +14,21 @@ export async function getNeeds(host, port) {
     })
 }
 
+export async function claimAndFork(host, port, owner, project, claimid) {
+    console.log("claimAndFork calling out to api")
+
+    fetch('https://'+host+':' + props.port + '/fork', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({owner: owner, project: project, claimid: claimid }),
+    })
+        .then(response => {
+            return response.text();
+        })
+        .then(data => {
+            console.log("data = " + data )
+        });
+}
+

@@ -1,6 +1,6 @@
 import {Button, Table, TableBody, TableCell, TableHeader, TableRow} from "grommet";
 import {useEffect, useState} from "react";
-import {getNeeds} from "./utils";
+import {getNeeds, claimAndFork} from "./utils";
 
 export function NeedList(props) {
 
@@ -21,7 +21,17 @@ export function NeedList(props) {
 
 
     function claimRow(ev) {
-        alert("Claiming row " + JSON.stringify(ev))
+        console.log("Claiming row " + JSON.stringify(ev))
+        const fetchData = async () => {
+            console.log("claimRow fetchData")
+            let owner = 'boshez'
+            let project = 'namevariation'
+            let claimid = 200
+            let x = await claimAndFork('arabella.rodley.com', 3000, owner, project, claimid)
+            console.log("rendering useEffect setting needs " + JSON.stringify(x))
+        }
+        fetchData();
+
     }
 
     function getNeedRow(row, index, arr) {

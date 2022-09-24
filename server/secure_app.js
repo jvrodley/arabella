@@ -51,8 +51,7 @@ app.post('/need',  async function (req, res) {
 });
 
 app.post('/fork',  async function (req, res) {
-  let fork = req.body
-  let needs = await forkGithubRepo("febinrev", "arithmo-gather", 100)
+  let needs = await forkGithubRepo(req.body.owner, req.body.project, req.body.claimid)
   return res.status(200).json(needs);
 });
 
