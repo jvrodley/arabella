@@ -109,18 +109,20 @@ app.get("/hooks", (req, resp) => {
 });
 
 try {
+  // list the repos
+
   // list the webhooks
-  const webhook_list = await new ReposService().listWebhooks()
+  const webhook_list = await new ReposService().listWebhooks("jvrodley", "h8mail_30")
   console.log("webhook_list = " + JSON.stringify(webhook_list))
   // delete the webhooks
   if( webhook_list.data.length > 0 ) {
-    const delret = await new ReposService().deleteWebhook(webhook_list.data[0].id)
+    const delret = await new ReposService().deleteWebhook(webhook_list.data[0].id, "jvrodley", "h8mail_30")
     console.log("delret = " + JSON.stringify(delret))
   }
 
   // recreate the webhooks
-  const addHook = await new ReposService().createWebhook("https://arabella.rodley.com:3000/hooks",
-      ["star", "push", "pull_request", "merge_group"]);
+  const addHook = await new ReposService().createWebhook("jvrodley", "h8mail_30", "https://arabella.rodley.com:3000/hooks",
+      ["star", "push", "pull_request", "merge_group"],  );
   console.log("createWebhook returns " + JSON.stringify(addHook))
 } catch(e) {
   console.log(e)

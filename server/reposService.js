@@ -1,9 +1,7 @@
 import githubClient from "./githubClient.js";
-const repositoryName = "arabella";
-const repositoryOwner =  "jvrodley";
 
 class ReposService {
-     async createWebhook(hookUrl, events, contentType = "json") {
+     async createWebhook(repositoryOwner,repositoryName, hookUrl, events, contentType = "json") {
         return await new githubClient().instance.repos.createWebhook({
             owner: repositoryOwner,
             repo: repositoryName,
@@ -15,14 +13,14 @@ class ReposService {
         });
     }
 
-    async listWebhooks() {
+    async listWebhooks(repositoryOwner,repositoryName) {
         return await new githubClient().instance.repos.listWebhooks({
             owner: repositoryOwner,
             repo: repositoryName
         });
     }
 
-     async deleteWebhook(hookId) {
+     async deleteWebhook(hookId,repositoryOwner,repositoryName) {
         return await new githubClient().instance.repos.deleteWebhook({
             owner: repositoryOwner,
             repo: repositoryName,
