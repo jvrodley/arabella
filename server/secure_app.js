@@ -72,10 +72,22 @@ let hooksRecieved = [];
 
 // CREATE PR and MERGE PR both post hooks!!
 
-app.post("/hooks", async (req, resp) => {
-  console.log("hooks post type " + req.get("x-github-event" ))
+app.post("/hooks", async (req, res) => {
+  let type = req.get("x-github-event" )
+  if( type !== 'push' ) {
+    res.sendStatus(200);
+    return
+  }
+  if( req.body.ref === "refs/heads/main" ) {
+    console.log("PUSH TO MAIN!!!!!!!")
+  } else if( req.body.ref === "refs/heads/develop" ) {
+    console.log("PUSH TO DEVELOP!!!!!!!")
+  }
+  
+  console.log("hooks post type " + type )
+  console.log(JSON.stringify(req.body))
   const hookData = { recievedAt: Date(), headers: req.headers, body: req.body };
-  resp.sendStatus(200);
+  res.sendStatus(200);
   hooksRecieved.push(hookData);
 });
 
