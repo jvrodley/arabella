@@ -83,7 +83,7 @@ app.post("/hooks", async (req, res) => {
   } else if( req.body.ref === "refs/heads/develop" ) {
     console.log("PUSH TO DEVELOP!!!!!!!")
   }
-  
+
   console.log("hooks post type " + type )
   console.log(JSON.stringify(req.body))
   const hookData = { recievedAt: Date(), headers: req.headers, body: req.body };
