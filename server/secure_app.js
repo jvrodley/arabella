@@ -80,8 +80,12 @@ app.get("/hooks", (req, resp) => {
   resp.send(JSON.stringify(hooksRecieved));
 });
 
-const addHook = await new ReposService().createWebhook("https://arabella.rodley.com:3000/hooks", ["star"]);
-console.log("createWebhook returns " + JSON.stringify(addHook))
+try {
+  const addHook = await new ReposService().createWebhook("https://arabella.rodley.com:3000/hooks", ["star"]);
+  console.log("createWebhook returns " + JSON.stringify(addHook))
+} catch(e) {
+  console.log(e)
+}
 
 // Parse request body and verifies incoming requests using discord-interactions package
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
