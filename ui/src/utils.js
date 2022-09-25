@@ -32,19 +32,22 @@ export async function getClaims(host, port, userid) {
 export async function claimAndFork(host, port, owner, project, needid) {
     console.log("claimAndFork calling out to api "+host+"," +port+"," +owner+"," +project+"," +needid)
 
-    fetch('https://'+host+':' + port + '/fork', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({owner: owner, project: project, needid: needid }),
-    })
-        .then(response => {
-//            return response.text();
+    return new Promise( async (resolve, reject) => {
+        const response = await fetch('https://'+host+':' + port + '/fork', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({owner: owner, project: project, needid: needid }),
         })
-        .then(data => {
-            console.log("data = " + data )
-            return( data )
-        });
+        if(response.ok) {
+            let x = await response.json();
+            console.log("Got needs " + JSON.stringify(x));
+            resolve(x)
+        } else {
+            console.log("error " + response.status)
+            reject( response.status )
+        }
+    })
 }
 
