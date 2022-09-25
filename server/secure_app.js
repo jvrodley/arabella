@@ -89,7 +89,7 @@ app.post("/hooks", async (req, res) => {
       let project = req.body.repository.name
 //      let claim = await getClaim(1, project)
       console.log("push to dev body = " + JSON.stringify(req.body))
-      let createpr = await new ReposService().createPullRequest("jvrodley", project, "develop", "main")
+      let createpr = await new ReposService().createPullRequest("jvrodley", "h8mail_30", "develop", "main")
       console.log("createpr = " + JSON.stringify(createpr))
     } catch(e) {
       console.log("pull request already exists")
