@@ -34,7 +34,7 @@ class ReposService {
         head="develop"
         base = "main"
 
-        let response = await octokit.request('POST /repos/carlosschults/ubiquitous-octo-couscous/pulls', {
+        let response = await new githubClient().instance.request('POST /repos/'+owner+'/'+repo+'/pulls', {
             owner: owner,
             repo: repo,
             title: 'Automated PR',
@@ -42,8 +42,9 @@ class ReposService {
             head: head,
             base: base
         });
+        console.log("pulls = " + JSON.stringify(response))
 
-        return await new githubClient().instance.pulls.create()
+        return (response)
     }
 }
 export default ReposService;
