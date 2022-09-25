@@ -16,8 +16,8 @@ export async function testWebhook() {
 
     const addHook = await repoSvc.createWebhook(hookConfig.url, ["star"]);
 
-    await activitySvc.starRepository();
-    await activitySvc.unstarRepository();
+    await activitySvc.starRepository("jvrodley", "arabella");
+    await activitySvc.unstarRepository("jvrodley", "arabella");
 
     captainHook.hooksReceived.forEach((hook) =>
         console.log(JSON.stringify(hook))

@@ -1,9 +1,7 @@
 import githubClient from './githubClient.js'
-const repositoryName = "arabella";
-const repositoryOwner =  "jvrodley";
 
 class ActivityService {
-    async starRepository() {
+    async starRepository(repositoryOwner,repositoryName ) {
         console.log("starRepository")
         return await new githubClient().instance.activity.starRepoForAuthenticatedUser({
             owner: repositoryOwner,
@@ -11,7 +9,7 @@ class ActivityService {
         });
     }
 
-    async unstarRepository() {
+    async unstarRepository(repositoryOwner,repositoryName ) {
         console.log("unstarRepository")
         return await new githubClient().instance.activity.unstarRepoForAuthenticatedUser({
             owner: repositoryOwner,
