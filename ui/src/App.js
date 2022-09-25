@@ -36,13 +36,15 @@ function App() {
     function gotoClaimedProject(original_owner, project) {
         let claimed_project_heading = "You Have Created A Fork Of " + original_owner + "/" + project
         let claimed_project_page = <List
-            primaryKey="name"
-            secondaryKey="percent"
+            primaryKey="step"
+            secondaryKey="description"
             data={[
-                { name: 'Alan', percent: 20 },
-                { name: 'Bryan', percent: 30 },
-                { name: 'Chris', percent: 40 },
-                { name: 'Eric', percent: 80 },
+                { step: 1, description: "You will receive an invitation from GitHub to become a contributor on this new repository. Please accept that invite." },
+                { step: 2, description: "You will receive an invitation to join the Discord channel on our server dedicated to this project.  Please join us."},
+                { step: 3, description: "Once you have accepted the GitHub invitation, you can clone the project and work on it as you would any other GitHub project."},
+                { step: 4, description: "You can commit freely to the feature branch. When you're ready to publish, create a PR to the develop branch. This will trigger automatic reviews by Arabella staff."},
+                { step: 5, description: "If your PR to develop passes all tests and reviews, an automatic PR to main will be created which will trigger more reviews."},
+                { step: 6, description: "If the merge to main passes, the project will be considered done."},
             ]}
         />
         setTheList(claimed_project_page)
