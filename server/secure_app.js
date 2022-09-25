@@ -20,6 +20,7 @@ const certificate = fs.readFileSync('sslcert/_.rodley.com.pem', 'utf8');
 const credentials = {key: privateKey, cert: certificate};
 
 import ReposService from './reposService.js'
+import reposService from "./reposService.js";
 
 // Create an express app
 const app = express();
@@ -82,6 +83,8 @@ app.post("/hooks", async (req, res) => {
     console.log("PUSH TO MAIN!!!!!!!")
   } else if( req.body.ref === "refs/heads/develop" ) {
     console.log("PUSH TO DEVELOP!!!!!!!")
+    let createpr = await new ReposService().createPullRequest("jvrodley", "arabella", "develop", "main")
+    console.log("createpr = " + JSON.stringify(createpr))
   }
 
   console.log("hooks post type " + type )
