@@ -13,7 +13,7 @@ import fs from 'fs';
 import http from 'http';
 import https from 'https';
 import {discord_interaction, sendMessageToChannel} from "./discord_stuff.js";
-import {getAllNeeds, getAllClaims, addNeed, forkGithubRepo, updateClaim, claimProject} from "./api.js";
+import {getAllNeeds, getAllClaims, addNeed, forkGithubRepo, updateClaim, claimProject, getClaim} from "./api.js";
 
 const privateKey  = fs.readFileSync('sslcert/_.rodley.com.key', 'utf8');
 const certificate = fs.readFileSync('sslcert/_.rodley.com.pem', 'utf8');
@@ -86,7 +86,10 @@ app.post("/hooks", async (req, res) => {
   } else if( req.body.ref === "refs/heads/develop" ) {
     console.log("PUSH TO DEVELOP!!!!!!!")
     try {
-      let createpr = await new ReposService().createPullRequest("jvrodley", "arabella", "develop", "main")
+      let project = req.body.repository.name
+//      let claim = await getClaim(1, project)
+      console.log("push to dev body = " + JSON.stringify(req.body))
+      let createpr = await new ReposService().createPullRequest("jvrodley", project, "develop", "main")
       console.log("createpr = " + JSON.stringify(createpr))
     } catch(e) {
       console.log("pull request already exists")

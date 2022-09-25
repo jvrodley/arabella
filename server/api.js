@@ -84,6 +84,24 @@ export async function getAllClaims(userid) {
     })
 }
 
+export async function getClaim(userid,project) {
+    console.log(" getAllClaims")
+    return new Promise(function (resolve, reject) {
+        let ssql = "select * from claim c join need n on c.needid_need = n.needid where n.project=''"+project+"'' and c.userid_user="+userid+" order by c.claimid desc"
+        console.log(ssql)
+        pool.query(ssql, (error, results) => {
+            if (error) {
+                reject(error)
+            }
+            if (results) {
+                resolve(results.rows);
+            } else {
+                resolve({results: []});
+            }
+        })
+    })
+}
+
 export async function getLanguages(owner, repo) {
     console.log('getLanguages '+owner+' '+ repo)
     // https://docs.github.com/en/rest/repos/repos#list-repository-languages
