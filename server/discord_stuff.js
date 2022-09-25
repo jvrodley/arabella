@@ -249,7 +249,7 @@ async function getInviteLink(client,channel) {
 export async function sendMessageToChannel( channel_name, message ) {
     let client_options = { intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] }
     const client = await new Client(client_options);
-    await client.login(process.env.DISCORD_TOKEN);
+    await client.login("MTAyMjU4NDIxMzc5MjM2NjY5NA.G2X22f.J44-ERxLWZCYHVwCa1BZ9t1MuMI4eAe3zlrTrc");
 
     let guild = await client.guilds.fetch(process.env.GUILD_ID)
     const ret = guild.channels.cache.find("needs").send("PR TO MAIN ACCEPTED!");
