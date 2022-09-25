@@ -11,6 +11,7 @@
   "dependencies": {
     "@discordjs/rest": "^1.1.0",
     "@octokit/app": "^13.0.8",
+    "@octokit/rest": "^19.0.4",
     "body-parser": "^1.20.0",
     "chai": "^4.3.6",
     "discord-api-types": "^0.37.10",

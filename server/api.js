@@ -204,9 +204,6 @@ export async function forkGithubRepo( owner, project, claimid ) {
 
 export async function claimProject( needid, userid ) {
     console.log("claimProject "+needid+","+userid)
-    const octokit = new Octokit({
-        auth: process.env.MY_GITHUB_TOKEN
-    })
     return new Promise(function(resolve, reject) {
         pool.query("INSERT INTO claim (needid_need, userid_user, forked_github_owner, forked_github_url ) VALUES ($1,$2,'','') RETURNING *",
             [needid, userid], (error, results) => {
@@ -219,11 +216,32 @@ export async function claimProject( needid, userid ) {
     })
 }
 
-export async function updateClaim( claimid, forked_github_owner, forked_github_url ) {
-    console.log("updateClaim "+claimid+","+forked_github_owner+','+forked_github_url)
+export async function createBranches(owner,repo, sha) {
+    let develop_ref = "refs/heads/develop"
     const octokit = new Octokit({
         auth: process.env.MY_GITHUB_TOKEN
     })
+
+    // Make develop off main
+    await octokit.rest.git.createRef({
+        owner: owner,
+        repo: repo,
+        ref: develop_ref,
+        sha: sha,
+    });
+
+    // Make branch named after the fixer
+    let feature_ref = "refs/heads/feature"
+    await octokit.rest.git.createRef({
+        owner: owner,
+        repo: repo,
+        ref: feature_ref,
+        sha: sha,
+    });
+}
+
+export async function updateClaim( claimid, forked_github_owner, forked_github_url ) {
+    console.log("updateClaim "+claimid+","+forked_github_owner+','+forked_github_url)
     return new Promise(function(resolve, reject) {
         pool.query("UPDATE claim set forked_github_owner=$1, forked_github_url=$2 where claimid=$3",
             [forked_github_owner, forked_github_url, claimid], (error, results) => {
@@ -235,3 +253,5 @@ export async function updateClaim( claimid, forked_github_owner, forked_github_u
             })
     })
 }
+
+

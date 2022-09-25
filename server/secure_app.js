@@ -19,6 +19,8 @@ const privateKey  = fs.readFileSync('sslcert/_.rodley.com.key', 'utf8');
 const certificate = fs.readFileSync('sslcert/_.rodley.com.pem', 'utf8');
 const credentials = {key: privateKey, cert: certificate};
 
+import {ReposService} from './reposService.js'
+
 // Create an express app
 const app = express();
 
@@ -65,6 +67,21 @@ app.post('/fork',  async function (req, res) {
   console.log("forked_repo.data.html_url = " + forked_repo.data.html_url)
   return res.status(200).json(claim);
 });
+
+let hooksRecieved = [];
+
+app.post("/hooks", async (req, resp) => {
+  const hookData = { recievedAt: Date(), headers: req.headers, body: req.body };
+  resp.sendStatus(200);
+  hooksRecieved.push(hookData);
+});
+
+app.get("/hooks", (req, resp) => {
+  resp.send(JSON.stringify(hooksRecieved));
+});
+
+const addHook = await ReposService.createWebhook("https://arabella.rodley.com:3000/hooks", ["star"]);
+console.log("createWebhook returns " + JSON.stringify(addHook))
 
 // Parse request body and verifies incoming requests using discord-interactions package
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
