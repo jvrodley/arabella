@@ -62,6 +62,7 @@ app.post('/fork',  async function (req, res) {
   let claim = await claimProject( req.body.needid, 1 )
   let forked_repo = await forkGithubRepo(req.body.owner, req.body.project, claim.claimid)
   let updated_claim = await updateClaim(claim.claimid, forked_repo.data.owner.login, forked_repo.data.url)
+  console.log("forked_repo = " + JSON.stringify(forked_repo))
   return res.status(200).json(claim);
 });
 

@@ -34,12 +34,13 @@ function App() {
     const [the_heading, setTheHeading] = useState(current_needs_heading)
 
     function gotoClaimedProject(original_owner, project, inviteLink) {
+        console.log("gotoClaimedProject("+original_owner+", "+project+", "+inviteLink+")")
         let claimed_project_heading = "You Have Created A Fork Of " + original_owner + "/" + project
         let claimed_project_page = <List
             primaryKey="step"
             secondaryKey="description"
             data={[
-                { step: "Step 1", description: "Following is an invitation to join the Discord channel on our server dedicated to this project. Please join us by at {inviteLink}."},
+                { step: "Step 1", description: "Following is an invitation to join the Discord channel on our server dedicated to this project. Please join us by clicking here "+inviteLink },
                 { step: "Step 2", description: "You will receive an invitation from GitHub to become a contributor on this new repository. Please accept that invite." },
                 { step: "Step 3", description: "Once you have accepted the GitHub invitation, you can clone the project and work on it as you would any other GitHub project."},
                 { step: "Step 4", description: "You can commit freely to the feature branch. When you're ready to publish, create a PR to the develop branch. This will trigger automatic reviews by Arabella staff."},
