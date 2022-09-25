@@ -37,7 +37,7 @@ export function NeedList(props) {
                 console.log("typeof x.claimid = " + typeof x.claimid)
                 if(claims[i].claimid === x.claimid) {
                     console.log("found proper claim here " + JSON.stringify(claims[i]))
-                    inviteLink = claims[i].inviteLink
+                    inviteLink = claims[i].invite_link
                     break;
                 }
             }
