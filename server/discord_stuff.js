@@ -261,5 +261,6 @@ export async function sendMessageToChannel( channel_name, message ) {
     await client.login(process.env.DISCORD_TOKEN);
 
     let guild = await client.guilds.fetch(process.env.GUILD_ID)
-    const ret = guild.channels.cache.find(channel => channel.name === "needs").send("PR TO MAIN ACCEPTED!");
+    const channel = guild.channels.cache.find(channel => channel.name === "needs")
+        channel.send("PR TO MAIN ACCEPTED!");
 }
