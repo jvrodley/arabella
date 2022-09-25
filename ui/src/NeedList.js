@@ -53,6 +53,7 @@ export function NeedList(props) {
                 <strong><a href={row.original_github_url}
                            target={"_blank"}>{row.original_github_owner}/{row.project}</a></strong>
                 <br/>{row.original_github_description}</TableCell>
+            <TableCell>{row.target_os_name} {row.target_os_version}</TableCell>
             <TableCell>{row.description}</TableCell>
             <TableCell>{row.languages}</TableCell>
             <TableCell><Button label={"Claim"} onClick={(e) => claimRow(row, e)}/></TableCell>
@@ -67,6 +68,9 @@ export function NeedList(props) {
                 </TableCell>
                 <TableCell scope="col" border="bottom">
                     The Need
+                </TableCell>
+                <TableCell scope="col" border="bottom">
+                    Platform
                 </TableCell>
                 <TableCell scope="col" border="bottom">
                     Languages
