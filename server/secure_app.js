@@ -19,7 +19,7 @@ const privateKey  = fs.readFileSync('sslcert/_.rodley.com.key', 'utf8');
 const certificate = fs.readFileSync('sslcert/_.rodley.com.pem', 'utf8');
 const credentials = {key: privateKey, cert: certificate};
 
-import {ReposService} from './reposService.js'
+import ReposService from './reposService.js'
 
 // Create an express app
 const app = express();
@@ -80,7 +80,7 @@ app.get("/hooks", (req, resp) => {
   resp.send(JSON.stringify(hooksRecieved));
 });
 
-const addHook = await ReposService.createWebhook("https://arabella.rodley.com:3000/hooks", ["star"]);
+const addHook = await new ReposService().createWebhook("https://arabella.rodley.com:3000/hooks", ["star"]);
 console.log("createWebhook returns " + JSON.stringify(addHook))
 
 // Parse request body and verifies incoming requests using discord-interactions package
