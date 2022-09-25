@@ -71,12 +71,14 @@ app.post('/fork',  async function (req, res) {
 let hooksRecieved = [];
 
 app.post("/hooks", async (req, resp) => {
+  console.log("hooks post *****************************************************************************")
   const hookData = { recievedAt: Date(), headers: req.headers, body: req.body };
   resp.sendStatus(200);
   hooksRecieved.push(hookData);
 });
 
 app.get("/hooks", (req, resp) => {
+  console.log("hooks get *****************************************************************************")
   resp.send(JSON.stringify(hooksRecieved));
 });
 
