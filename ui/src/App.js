@@ -24,7 +24,7 @@ function App() {
     let claimed_project_heading = "You Have Created A Fork"
     let claimed_project_page = <p>AAAAAAAA</p>
 
-    let the_need_list = <NeedList needs={needs} setNeedListFromChild={setNeedListFromChild}/>
+    let the_need_list = <NeedList needs={needs} setNeedListFromChild={setNeedListFromChild}  gotoClaimedProject={gotoClaimedProject} />
     let my_project_list = <ProjectList projects={projects} setProjectListFromChild={setProjectListFromChild}/>
 
     let my_project_heading = "My Projects"
@@ -74,7 +74,7 @@ function App() {
                                  <Button icon={<Help/>} hoverIndicator/>
                              }>
                         <Nav gap="small">
-                            <Button icon={<Projects/>} hoverIndicator label={"Current Needs"} onClick={gotoNeedList} onClaim={gotoClaimedProject} />
+                            <Button icon={<Projects/>} hoverIndicator label={"Current Needs"} onClick={gotoNeedList}/>
                             <Button icon={<Projects/>} hoverIndicator label={"My Projects"} onClick={gotoProjectList}/>
                             <Button icon={<Clock/>} hoverIndicator/>
                         </Nav>

@@ -26,9 +26,10 @@ export function NeedList(props) {
             console.log("claimRow fetchData")
             let x = await claimAndFork('arabella.rodley.com', 3000, row.original_github_owner, row.project, row.needid)
             console.log("rendering useEffect setting needs " + JSON.stringify(x))
-            let y = await getNeeds('arabella.rodley.com', 3000, 1)
-            setNeeds(JSON.parse(JSON.stringify(y)))
-            props.setNeedListFromChild(JSON.parse(JSON.stringify(y)))
+//            let y = await getNeeds('arabella.rodley.com', 3000, 1)
+//            setNeeds(JSON.parse(JSON.stringify(y)))
+//            props.setNeedListFromChild(JSON.parse(JSON.stringify(y)))
+            props.gotoClaimedProject()
        }
         fetchData();
 
