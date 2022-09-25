@@ -77,7 +77,7 @@ let hooksRecieved = [];
 app.post("/hooks", async (req, res) => {
   let type = req.get("x-github-event" )
   if( type !== 'push' ) {
-//    await sendMessageToChannel("needs", "BLAHBLAH")
+    await sendMessageToChannel("needs", "BLAHBLAH")
     res.sendStatus(200);
     return
   }
