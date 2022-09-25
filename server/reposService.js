@@ -15,6 +15,13 @@ class ReposService {
         });
     }
 
+    async listWebhooks() {
+        return await new githubClient().instance.repos.listWebhooks({
+            owner: repositoryOwner,
+            repo: repositoryName
+        });
+    }
+
      async deleteWebhook(hookId) {
         return await new githubClient().instance.repos.deleteWebhook({
             owner: repositoryOwner,

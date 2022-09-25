@@ -83,10 +83,17 @@ app.get("/hooks", (req, resp) => {
 });
 
 try {
-  const addHook = await new ReposService().createWebhook("https://arabella.rodley.com:3000/hooks", ["star"]);
+  // list the webhooks
+  const webhook_list = await new ReposService().listWebhooks()
+  console.log("webhook_list = " + JSON.stringify(webhook_list))
+  // delete the webhooks
+  // recreate the webhooks
+  const addHook = await new ReposService().createWebhook("https://arabella.rodley.com:3000/hooks",
+      ["star", "push", "pull_request", "merge_group"]);
   console.log("createWebhook returns " + JSON.stringify(addHook))
 } catch(e) {
   console.log(e)
+  
 }
 
 // Parse request body and verifies incoming requests using discord-interactions package
