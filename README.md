@@ -69,7 +69,7 @@ Clone the new Arabella project locally, make a change, commit the change to fix-
 Accept the PR-to-develop in GitHub
 
 *	Show one automated security check run against an isolated clone of the develop branch (NOT DONE)
-*	Show automated PR-to-main (DEMO’d)
+*	Show automated PR-to-main (DEMO’d) The automated PR-to-main that should have shown up in the video was actually registered against a test project hardwired in the code.
 
 Accept the PR-to-main in GitHub
 
