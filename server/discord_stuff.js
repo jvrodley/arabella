@@ -246,7 +246,6 @@ async function getInviteLink(client,channel) {
 
 }
 
-
 export async function sendMessageToChannel( channel_name, message ) {
 // Create a new client instance
     let client_options = { intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] }
