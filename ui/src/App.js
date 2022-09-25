@@ -33,7 +33,18 @@ function App() {
     const [the_list, setTheList] = useState(the_need_list)
     const [the_heading, setTheHeading] = useState(current_needs_heading)
 
-    function gotoClaimedProject() {
+    function gotoClaimedProject(original_owner, project) {
+        let claimed_project_heading = "You Have Created A Fork Of " + original_owner + "/" + project
+        let claimed_project_page = <List
+            primaryKey="name"
+            secondaryKey="percent"
+            data={[
+                { name: 'Alan', percent: 20 },
+                { name: 'Bryan', percent: 30 },
+                { name: 'Chris', percent: 40 },
+                { name: 'Eric', percent: 80 },
+            ]}
+        />
         setTheList(claimed_project_page)
         setTheHeading(claimed_project_heading)
     }
