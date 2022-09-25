@@ -32,7 +32,9 @@ export function NeedList(props) {
             let claims = await getClaims('arabella.rodley.com', 3000, 1)
             let inviteLink = ''
             for( let i = 0; i < claims.length; i++ ) {
-                console.log("comparing " + claims[i].claimid + " to " + x.claimid)
+                console.log(`comparing ${claims[i].claimid} to ${x.claimid}`)
+                console.log("typeof claims[i].claimid = " + typeof claims[i].claimid)
+                console.log("typeof x.claimid = " + typeof x.claimid)
                 if(claims[i].claimid === x.claimid) {
                     console.log("found proper claim here " + JSON.stringify(claims[i]))
                     inviteLink = claims[i].inviteLink
