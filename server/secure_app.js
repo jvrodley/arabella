@@ -82,8 +82,10 @@ app.post("/hooks", async (req, res) => {
   }
   if( req.body.ref === "refs/heads/main" ) {
     console.log("PUSH TO MAIN!!!!!!!")
+    await sendMessageToChannel("needs", "BLAHBLAH")
   } else if( req.body.ref === "refs/heads/develop" ) {
     console.log("PUSH TO DEVELOP!!!!!!!")
+    await sendMessageToChannel("needs", "BLAHBLAH")
     let createpr = await new ReposService().createPullRequest("jvrodley", "arabella", "develop", "main")
     console.log("createpr = " + JSON.stringify(createpr))
   }
@@ -129,7 +131,6 @@ app.post('/interactions', async function (req, res) {
   return( discord_interaction(req,res))
 });
 
-await sendMessageToChannel("needs", "BLAHBLAH")
 
 // var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
