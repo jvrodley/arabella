@@ -1,20 +1,23 @@
 
 # Project name - Arabella
+
+[https://arabella.rodley.com:3000]()
+
+## Team Members
+John Rodley
+
+## Tool Description
 Arabella is a system for matching what investigators need from FOSS
 tools on GitHub to technical resources in the OSINT community that can work on those tools.  
 Investigators propose a change/update to a FOSS project, technical contributors pick projects from the list of
 needs and upgrade a forked version of the FOSS project to meet the need.
 
-## Team Members
-This section is a list of team members, and possibly links to GitHub/GitLab/LinkedIn/personal blog pages for members.
-
-## Tool Description
-This sections discusses the purpose and motivation for the tool, and how it addresses a tool need you've identified.
+For more detail, please see the pdf file here [https://github.com/jvrodley/arabella/blob/main/Arabella%20Proposal.pdf](https://github.com/jvrodley/arabella/blob/main/Arabella%20Proposal.pdf)
 
 ## Installation
 This section includes detailed instructions for installing the tool, including any terminal commands that need to be executed and dependencies that need to be installed. Instructions should be understandable by non-technical users (e.g. someone who knows how to open a terminal and run commands, but isn't necessarily a programmer), for example:
 
-1. This is not an easy or quick installation - requires keys and ssl certs
+1. This is not an easy or quick installation.  In fact, it is impractical for all intents and purposes as it requires secure tokens, keys and ssl certs.  The discord and github integrations require them.
 
 2. Download the tool's repository using the command:
 
@@ -46,7 +49,8 @@ Projects that have been claimed by a fixer appear in the My Projects screen.
 
 ## Additional Information
 This is development workflow automation tuned for the OSINT community.  We initiate the workflow from Discord because
-that's where these needs are identified and the drivers of this process (bcat) live there.  
+that's where these needs are identified and the drivers of this process (bcat) live there.  We store only the information we need
+to run in a 3 table postgresql database.  
 
 Demo Script and what we didn’t show (i.e. doesn't work yet)
 
@@ -74,5 +78,5 @@ Accept the PR-to-main in GitHub
 *	Show PR back to originating project on GitHub (NOT DONE)
 *	** Show update of Arabella front page
 
-The Pull Request automation worked for a hard-wired project-name but we ran out of time.  In the same vein, even with
+The Pull Request automation worked for a hard-wired project-name but we ran out of time to parameterize.  In the same vein, even with
 the other tricky Discord stuff we did, we didn't manage to post a message to a channel - go figure.
