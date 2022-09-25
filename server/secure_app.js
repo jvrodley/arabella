@@ -80,13 +80,11 @@ app.post("/hooks", async (req, res) => {
     res.sendStatus(200);
     return
   }
-  
+
   if( req.body.ref === "refs/heads/main" ) {
     console.log("PUSH TO MAIN!!!!!!!")
-    await sendMessageToChannel("needs", "BLAHBLAH")
   } else if( req.body.ref === "refs/heads/develop" ) {
     console.log("PUSH TO DEVELOP!!!!!!!")
-    await sendMessageToChannel("needs", "BLAHBLAH")
     let createpr = await new ReposService().createPullRequest("jvrodley", "arabella", "develop", "main")
     console.log("createpr = " + JSON.stringify(createpr))
   }
