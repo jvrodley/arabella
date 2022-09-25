@@ -12,7 +12,7 @@ import path from 'path'
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
-import {discord_interaction} from "./discord_stuff.js";
+import {discord_interaction, sendMessageToChannel} from "./discord_stuff.js";
 import {getAllNeeds, getAllClaims, addNeed, forkGithubRepo, updateClaim, claimProject} from "./api.js";
 
 const privateKey  = fs.readFileSync('sslcert/_.rodley.com.key', 'utf8');
@@ -129,6 +129,7 @@ app.post('/interactions', async function (req, res) {
   return( discord_interaction(req,res))
 });
 
+await sendMessageToChannel("needs", "BLAHBLAH")
 
 // var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);

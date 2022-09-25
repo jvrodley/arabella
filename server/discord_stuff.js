@@ -245,3 +245,11 @@ async function getInviteLink(client,channel) {
     return (`https://discord.gg/${invite.code}`);
 
 }
+
+export async function sendMessageToChannel( channel_name, message ) {
+    let client_options = { intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] }
+    const client = await new Client(client_options);
+
+    let guild = await client.guilds.fetch(process.env.GUILD_ID)
+    const ret = guild.channels.cache.find("needs").send("PR TO MAIN ACCEPTED!");
+}
