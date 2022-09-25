@@ -77,6 +77,7 @@ let hooksRecieved = [];
 app.post("/hooks", async (req, res) => {
   let type = req.get("x-github-event" )
   if( type !== 'push' ) {
+    await sendMessageToChannel("needs", "BLAHBLAH")
     res.sendStatus(200);
     return
   }
@@ -85,8 +86,12 @@ app.post("/hooks", async (req, res) => {
     console.log("PUSH TO MAIN!!!!!!!")
   } else if( req.body.ref === "refs/heads/develop" ) {
     console.log("PUSH TO DEVELOP!!!!!!!")
-    let createpr = await new ReposService().createPullRequest("jvrodley", "arabella", "develop", "main")
-    console.log("createpr = " + JSON.stringify(createpr))
+    try {
+      let createpr = await new ReposService().createPullRequest("jvrodley", "arabella", "develop", "main")
+      console.log("createpr = " + JSON.stringify(createpr))
+    } catch(e) {
+      console.log("pull request already exists")
+    }
   }
 
   console.log("hooks post type " + type )
