@@ -12,7 +12,7 @@ import path from 'path'
 import fs from 'fs';
 import http from 'http';
 import https from 'https';
-import {discord_interaction} from "./discord_stuff.js";
+import {discord_interaction, sendMessageToChannel} from "./discord_stuff.js";
 import {getAllNeeds, getAllClaims, addNeed, forkGithubRepo, updateClaim, claimProject} from "./api.js";
 
 const privateKey  = fs.readFileSync('sslcert/_.rodley.com.key', 'utf8');
@@ -20,6 +20,7 @@ const certificate = fs.readFileSync('sslcert/_.rodley.com.pem', 'utf8');
 const credentials = {key: privateKey, cert: certificate};
 
 import ReposService from './reposService.js'
+import reposService from "./reposService.js";
 
 // Create an express app
 const app = express();
@@ -70,12 +71,28 @@ app.post('/fork',  async function (req, res) {
 
 let hooksRecieved = [];
 
+
 // CREATE PR and MERGE PR both post hooks!!
 
-app.post("/hooks", async (req, resp) => {
-  console.log("hooks post type " + req.get("x-github-event" ))
+app.post("/hooks", async (req, res) => {
+  let type = req.get("x-github-event" )
+  if( type !== 'push' ) {
+    res.sendStatus(200);
+    return
+  }
+
+  if( req.body.ref === "refs/heads/main" ) {
+    console.log("PUSH TO MAIN!!!!!!!")
+  } else if( req.body.ref === "refs/heads/develop" ) {
+    console.log("PUSH TO DEVELOP!!!!!!!")
+    let createpr = await new ReposService().createPullRequest("jvrodley", "arabella", "develop", "main")
+    console.log("createpr = " + JSON.stringify(createpr))
+  }
+
+  console.log("hooks post type " + type )
+  console.log(JSON.stringify(req.body))
   const hookData = { recievedAt: Date(), headers: req.headers, body: req.body };
-  resp.sendStatus(200);
+  res.sendStatus(200);
   hooksRecieved.push(hookData);
 });
 
