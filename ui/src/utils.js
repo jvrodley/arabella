@@ -40,10 +40,11 @@ export async function claimAndFork(host, port, owner, project, needid) {
         body: JSON.stringify({owner: owner, project: project, needid: needid }),
     })
         .then(response => {
-            return response.text();
+//            return response.text();
         })
         .then(data => {
             console.log("data = " + data )
+            return( data )
         });
 }
 
