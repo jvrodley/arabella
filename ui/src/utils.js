@@ -42,7 +42,7 @@ export async function claimAndFork(host, port, owner, project, needid) {
         })
         if(response.ok) {
             let x = await response.json();
-            console.log("Got needs " + JSON.stringify(x));
+            console.log("Got claimAndFork " + JSON.stringify(x));
             resolve(x)
         } else {
             console.log("error " + response.status)

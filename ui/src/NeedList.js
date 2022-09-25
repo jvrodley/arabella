@@ -1,6 +1,6 @@
 import {Button, Table, TableBody, TableCell, TableHeader, TableRow} from "grommet";
 import {useEffect, useState} from "react";
-import {getNeeds, claimAndFork} from "./utils";
+import {getNeeds, claimAndFork, getClaims} from "./utils";
 
 export function NeedList(props) {
 
@@ -29,7 +29,16 @@ export function NeedList(props) {
 //            let y = await getNeeds('arabella.rodley.com', 3000, 1)
 //            setNeeds(JSON.parse(JSON.stringify(y)))
 //            props.setNeedListFromChild(JSON.parse(JSON.stringify(y)))
-            props.gotoClaimedProject()
+            let claims = await getClaims('arabella.rodley.com', 3000, 1)
+            let inviteLink = ''
+            for( let i = 0; i < claims.length; i++ ) {
+                console.log("comparing " + claims[i].claimid + " to " + x.claimid)
+                if(claims[i].claimid === x.claimid) {
+                    inviteLink = claims[i].inviteLink
+                    break;
+                }
+            }
+            props.gotoClaimedProject(row.original_github_owner, row.project, inviteLink)
        }
         fetchData();
 
