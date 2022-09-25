@@ -247,10 +247,19 @@ async function getInviteLink(client,channel) {
 }
 
 export async function sendMessageToChannel( channel_name, message ) {
+// Create a new client instance
     let client_options = { intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] }
-    const client = await new Client(client_options);
-    await client.login("MTAyMjU4NDIxMzc5MjM2NjY5NA.G2X22f.J44-ERxLWZCYHVwCa1BZ9t1MuMI4eAe3zlrTrc");
 
+    const client = await new Client(client_options);
+
+// When the client is ready, run this code (only once)
+    client.once('ready', () => {
+        console.log('Ready!');
+    });
+
+// Login to Discord with your client's token
+    await client.login(process.env.DISCORD_TOKEN);
+    
     let guild = await client.guilds.fetch(process.env.GUILD_ID)
     const ret = guild.channels.cache.find("needs").send("PR TO MAIN ACCEPTED!");
 }
