@@ -38,40 +38,46 @@ function App() {
         let claimed_project_heading = "You Have Created A Fork Of " + original_owner + "/" + project
         let inv=<a href="+inviteLink+">inviteLink</a>
         let claimed_project_page = <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableCell scope="col" border="bottom">Step</TableCell>
+                    <TableCell scope="col" border="bottom">Description</TableCell>
+                </TableRow>
+            </TableHeader>
+
             <TableBody>
                 <TableRow>
-                    <TableCell scope="row">Step 1</TableCell>
-                    <TableCell>Following is an invitation to join the Discord channel on our server dedicated to this project. Please join us by clicking here
-                        <a href={inviteLink} >inviteLink</a>
+                    <TableCell scope="row">Join Discord</TableCell>
+                    <TableCell>Following is an invitation to join the Discord channel on our server dedicated to this project. Please join us by clicking here <a href={inviteLink} >inviteLink</a>
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell scope="row">Step 2</TableCell>
+                    <TableCell scope="row">Join the project</TableCell>
                     <TableCell>You will receive an invitation from GitHub to become a contributor on this new repository. Please accept that invite.
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell scope="row">Step 3</TableCell>
+                    <TableCell scope="row">Work the project</TableCell>
                     <TableCell>Once you have accepted the GitHub invitation, you can clone the project and work on it as you would any other GitHub project.
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell scope="row">Step 4</TableCell>
+                    <TableCell scope="row">Commit fixes</TableCell>
                     <TableCell>You can commit freely to the feature branch. When you're ready to publish, create a PR to the develop branch. This will trigger automatic reviews by Arabella staff.
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell scope="row">Step 5</TableCell>
+                    <TableCell scope="row">PR when ready</TableCell>
                     <TableCell>If your PR to develop passes all tests and reviews, an automatic PR to main will be created which will trigger more reviews.
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell scope="row">Step 6</TableCell>
+                    <TableCell scope="row">Merge to main</TableCell>
                     <TableCell>If the merge to main passes, the project will be considered done.
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell scope="row">Step 7</TableCell>
+                    <TableCell scope="row">Success</TableCell>
                     <TableCell>PROFIT!
                     </TableCell>
                 </TableRow>
