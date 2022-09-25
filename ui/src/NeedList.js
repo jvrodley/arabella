@@ -34,6 +34,7 @@ export function NeedList(props) {
             for( let i = 0; i < claims.length; i++ ) {
                 console.log("comparing " + claims[i].claimid + " to " + x.claimid)
                 if(claims[i].claimid === x.claimid) {
+                    console.log("found proper claim here " + JSON.stringify(claims[i]))
                     inviteLink = claims[i].inviteLink
                     break;
                 }

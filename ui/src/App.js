@@ -45,8 +45,8 @@ function App() {
                 { step: "Step 3", description: "Once you have accepted the GitHub invitation, you can clone the project and work on it as you would any other GitHub project."},
                 { step: "Step 4", description: "You can commit freely to the feature branch. When you're ready to publish, create a PR to the develop branch. This will trigger automatic reviews by Arabella staff."},
                 { step: "Step 5", description: "If your PR to develop passes all tests and reviews, an automatic PR to main will be created which will trigger more reviews."},
-                { step: "Step 6", description: "If the merge to main passes, the project will be considered done."},
-                { step: "Step 7", description: "PROFIT!"},
+                { step: "Step 6", description: "If the merge to main passes, the project will be considered done.                              "},
+                { step: "Step 7", description: "PROFIT!                                                                                           "},
 
             ]}
         />
