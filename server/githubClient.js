@@ -6,4 +6,4 @@ class GithubClient {
         this.instance = new Octokit({ auth: process.env.GITHUB_TOKEN });
     }
 }
-module.exports = new GithubClient();
+export default GithubClient

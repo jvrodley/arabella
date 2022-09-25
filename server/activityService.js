@@ -4,14 +4,14 @@ const repositoryOwner =  "jvrodley";
 
 class ActivityService {
     async starRepository() {
-        return await githubClient.instance.activity.starRepoForAuthenticatedUser({
+        return await new githubClient().instance.activity.starRepoForAuthenticatedUser({
             owner: repositoryOwner,
             repo: repositoryName,
         });
     }
 
     async unstarRepository() {
-        return await githubClient.instance.activity.unstarRepoForAuthenticatedUser({
+        return await new githubClient().instance.activity.unstarRepoForAuthenticatedUser({
             owner: repositoryOwner,
             repo: repositoryName,
         });
@@ -19,4 +19,4 @@ class ActivityService {
 
 }
 
-module.exports = ActivityService;
+export default ActivityService;

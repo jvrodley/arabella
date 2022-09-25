@@ -4,7 +4,7 @@ const repositoryOwner =  "jvrodley";
 
 class ReposService {
      async createWebhook(hookUrl, events, contentType = "json") {
-        return await githubClient.instance.repos.createWebhook({
+        return await new githubClient().instance.repos.createWebhook({
             owner: repositoryOwner,
             repo: repositoryName,
             config: {
@@ -16,7 +16,7 @@ class ReposService {
     }
 
      async deleteWebhook(hookId) {
-        return await githubClient.instance.repos.deleteWebhook({
+        return await new githubClient().instance.repos.deleteWebhook({
             owner: repositoryOwner,
             repo: repositoryName,
             hook_id: hookId,
@@ -24,4 +24,4 @@ class ReposService {
     }
 
 }
-module.exports = ReposService;
+export default ReposService;
